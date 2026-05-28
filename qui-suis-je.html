@@ -3,160 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Qui suis-je ? &mdash; Alexandre Enderlin</title>
+<title>Profil · Alexandre Enderlin</title>
 <link rel="stylesheet" href="styles.css">
 <style>
-.page-hero { background: linear-gradient(135deg, var(--navy-deep), var(--navy)); color: var(--cream-pure); padding: 70px 0 60px; position:relative; overflow:hidden; }
-.page-hero::after { content:""; position:absolute; right:-5%; top:-30%; width:400px; height:400px; background:radial-gradient(circle,rgba(201,163,90,0.15),transparent 65%); border-radius:50%; }
-.page-hero .eyebrow { color: var(--gold-bright); }
-.page-hero h1 { color: var(--cream-pure); max-width: 800px; }
-.page-hero p { color: rgba(244,239,230,0.78); max-width: 680px; font-size: 1.12rem; margin-top: 16px; }
-.breadcrumb { font-size:0.82rem; color: var(--gold-bright); margin-bottom:18px; letter-spacing:0.5px; }
-.breadcrumb a { color: rgba(244,239,230,0.6); text-decoration:none; }
-.breadcrumb a:hover { color: var(--gold-bright); }
-.proof-box { background: var(--cream-pure); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 24px 28px; margin: 22px 0; }
-.proof-box h4 { font-family: var(--display); color: var(--navy); margin-bottom:8px; font-size:1.1rem; }
-.tag { display:inline-block; background: var(--navy); color: var(--cream-pure); font-size:0.72rem; letter-spacing:1px; text-transform:uppercase; padding:5px 12px; border-radius:50px; margin:3px 4px 3px 0; font-weight:600;}
-.tag.gold { background: var(--gold); color: var(--navy-deep);}
-.placeholder-note { background: rgba(201,163,90,0.1); border:1px dashed var(--gold); border-radius:10px; padding:14px 18px; font-size:0.88rem; color:#5a4a28; margin:18px 0; }
-ul.clean { list-style:none; padding:0; }
-ul.clean li { padding:10px 0 10px 28px; position:relative; border-bottom:1px solid var(--line); }
-ul.clean li:before { content:"&#9656;"; color:var(--gold); position:absolute; left:0; }
-.media-frame { aspect-ratio:16/9; background:linear-gradient(160deg,var(--navy-soft),var(--navy-deep)); border:1px solid var(--line); border-radius:14px; display:flex;align-items:center;justify-content:center; color:rgba(244,239,230,0.4); text-align:center; padding:20px; }
-.level-badge { display:inline-flex; align-items:center; gap:8px; background:var(--navy); color:var(--gold-bright); padding:8px 18px; border-radius:50px; font-size:0.82rem; font-weight:600; letter-spacing:0.5px; margin-bottom:20px;}
-
-.portrait-side { aspect-ratio:4/5; border-radius:16px; background:linear-gradient(160deg,var(--navy-soft),var(--navy-deep)); border:1px solid var(--line); display:flex;align-items:center;justify-content:center;color:rgba(244,239,230,0.4);text-align:center; overflow:hidden;}
-.portrait-side img{width:100%;height:100%;object-fit:cover;}
-.timeline { margin-top:20px; }
-.tl-item { position:relative; padding:0 0 26px 26px; border-left:2px solid rgba(201,163,90,0.4); }
-.tl-item:last-child{border-left-color:transparent;}
-.tl-item:before{content:"";position:absolute;left:-7px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--gold);}
-.tl-date{font-size:0.78rem;letter-spacing:1px;color:var(--gold-bright);font-weight:600;text-transform:uppercase;}
-.tl-item h4{font-family:var(--display);color:var(--cream-pure);font-size:1.15rem;margin:4px 0 4px;}
-.tl-item p{color:rgba(244,239,230,0.72);margin:0;font-size:0.92rem;}
-@media(max-width:900px){ .wrap[style*="grid-template-columns:300px"]{grid-template-columns:1fr !important;} .portrait-side{max-width:280px;margin:0 auto;} }
+.profil-top{display:grid;grid-template-columns:300px 1fr;gap:56px;align-items:start}
+.portrait{aspect-ratio:4/5;background:var(--paper-2);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;color:var(--ink-faint);font-family:var(--mono);font-size:0.74rem;letter-spacing:0.06em;text-align:center;padding:20px}
+.portrait img{width:100%;height:100%;object-fit:cover}
+.tl{list-style:none;margin-top:8px}
+.tl li{display:grid;grid-template-columns:0.5fr 1.5fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--rule)}
+.tl li:first-child{border-top:1px solid var(--rule)}
+.tl .when{font-family:var(--mono);font-size:0.76rem;letter-spacing:0.06em;color:var(--ink-faint)}
+.tl h4{font-family:var(--serif);font-weight:500;font-size:1.12rem;margin-bottom:3px}
+.tl p{font-size:0.9rem;margin:0;color:var(--ink-soft)}
+.cols{columns:2;column-gap:48px}
+.cols .blk{break-inside:avoid;margin-bottom:30px}
+.cols h4{font-family:var(--mono);font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.cols p{font-size:0.95rem;margin:0}
+@media(max-width:760px){.profil-top{grid-template-columns:1fr;gap:24px}.portrait{max-width:260px}.tl li{grid-template-columns:1fr;gap:4px}.cols{columns:1}}
 </style>
 </head>
 <body>
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Alexandre <span>Enderlin</span></a>
-    <button class="nav-toggle" onclick="toggleMenu()">&#9776;</button>
-    <ul class="nav-links">
+<nav class="topbar">
+  <div class="topbar-in">
+    <a href="index.html" class="brand">Alexandre Enderlin<span class="dot">.</span></a>
+    <button class="burger" onclick="toggleMenu()">Menu</button>
+    <ul class="menu">
       <li><a href="index.html">Accueil</a></li>
-      <li><a href="experiences.html">Exp&eacute;riences &#65291;</a>
-        <ul class="dropdown-menu">
-          <li><a href="exp-rexel.html">Reporting &amp; pilotage &mdash; Rexel</a></li>
-          <li><a href="exp-nexans.html">Credit Management &mdash; Nexans</a></li>
-          <li><a href="exp-conseil.html">Conseil des &eacute;tudiants</a></li>
+      <li><a href="experiences.html">Expériences</a>
+        <ul class="sub">
+          <li><a href="exp-rexel.html">Rexel France</a></li>
+          <li><a href="exp-nexans.html">Nexans France</a></li>
+          <li><a href="exp-conseil.html">Conseil des étudiants</a></li>
           <li><a href="exp-sae.html">Projets &amp; SAE</a></li>
         </ul>
       </li>
-      <li><a href="competences.html">Comp&eacute;tences &#65291;</a>
-        <ul class="dropdown-menu">
+      <li><a href="competences.html">Compétences</a>
+        <ul class="sub">
           <li><a href="comp-analyser.html">Analyser</a></li>
-          <li><a href="comp-decider.html">D&eacute;cider</a></li>
+          <li><a href="comp-decider.html">Décider</a></li>
           <li><a href="comp-piloter.html">Piloter</a></li>
           <li><a href="comp-produire.html">Produire</a></li>
-          <li><a href="comp-evaluer.html">&Eacute;valuer</a></li>
+          <li><a href="comp-evaluer.html">Évaluer</a></li>
         </ul>
       </li>
-      <li><a href="a-cote.html">&Agrave; c&ocirc;t&eacute; &#65291;</a>
-        <ul class="dropdown-menu">
+      <li><a href="a-cote.html">À côté</a>
+        <ul class="sub">
           <li><a href="cote-course.html">Course &amp; marathon</a></li>
           <li><a href="cote-voyages.html">Carnet de voyage</a></li>
-          <li><a href="cote-engagement.html">Engagement &amp; b&eacute;n&eacute;volat</a></li>
+          <li><a href="cote-engagement.html">Engagement associatif</a></li>
         </ul>
       </li>
-      <li><a href="qui-suis-je.html" class="active">Qui suis-je ?</a></li>
+      <li><a href="qui-suis-je.html" class="here">Profil</a></li>
     </ul>
   </div>
 </nav>
-
-<header class="page-hero">
-  <div class="wrap">
-    <div class="breadcrumb"><a href="index.html">Accueil</a> / Qui suis-je ?</div>
-    <span class="eyebrow">Faisons connaissance</span>
-    <h1>Qui suis-je ?</h1>
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="index-num rev" style="margin-bottom:2rem">Profil</div>
+    <span class="kicker rev">Faisons connaissance</span>
+    <h1 class="rev" style="max-width:880px">Alexandre Enderlin</h1>
+    
   </div>
 </header>
-
-<section class="section">
-  <div class="wrap" style="display:grid;grid-template-columns:300px 1fr;gap:50px;align-items:start;">
-    <div class="reveal">
-      <div class="portrait-side">
-        <div class="placeholder">&#128247;<br><span style="font-size:0.85rem;">Votre photo</span></div>
-      </div>
-      <a href="CV_Alexandre_Enderlin.pdf" class="btn btn-gold" style="width:100%;text-align:center;margin-top:18px;" download>&#11015; T&eacute;l&eacute;charger mon CV</a>
+<section class="region" style="padding-top:clamp(30px,5vw,56px)">
+  <div class="shell profil-top">
+    <div class="rev">
+      <div class="portrait">Votre photo<br>(format portrait)</div>
+      <a href="CV_Alexandre_Enderlin.pdf" class="btn" style="width:100%;text-align:center;margin-top:16px" download>Télécharger le CV</a>
     </div>
-    <div class="reveal">
-      <h2 style="margin-top:0;">Alexandre Enderlin</h2>
-      <p class="lead">Futur analyste junior &amp; contr&ocirc;le financier.</p>
-      <p>J'ai 22 ans et je suis &eacute;tudiant en BUT Gestion des entreprises et des administrations, parcours <strong>Gestion comptable, fiscale et financi&egrave;re</strong> &agrave; l'IUT de Paris Rives de Seine. &Agrave; la rentr&eacute;e, j'int&egrave;gre un <strong>Master Finance, Audit &amp; Contr&ocirc;le de Gestion</strong> &agrave; Excelia Business School.</p>
-      <p>Rigoureux, organis&eacute; et dot&eacute; d'un solide esprit d'analyse, j'ai forg&eacute; mon exp&eacute;rience au fil de mes alternances chez Nexans et Rexel, en comptabilit&eacute; client et fournisseur. J'aime optimiser les processus financiers et transformer la donn&eacute;e en information utile.</p>
-      <p>Au-del&agrave; des chiffres, je suis curieux des actualit&eacute;s &eacute;conomiques, passionn&eacute; de voyages culturels et de course &agrave; pied &mdash; et engag&eacute; dans la vie associative.</p>
-      <p style="margin-bottom:0;"><span class="tag gold">enderlin.alexandre@gmail.com</span> <span class="tag">+33 6 14 82 19 49</span> <span class="tag">LinkedIn : Alexandre Enderlin</span></p>
-    </div>
-  </div>
-</section>
-
-<section class="section" style="background:var(--navy);color:var(--cream);padding-top:70px;padding-bottom:70px;">
-  <div class="wrap">
-    <div class="grid grid-2">
-      <div class="reveal">
-        <span class="eyebrow" style="color:var(--gold-bright);">Parcours</span>
-        <h2 style="color:var(--cream-pure);">Formation</h2>
-        <div class="timeline">
-          <div class="tl-item"><span class="tl-date">2026 &mdash; 2028</span><h4>Master PGE Finance</h4><p>Excelia Business School Paris &mdash; Parcours Finance, Audit &amp; Contr&ocirc;le de Gestion.</p></div>
-          <div class="tl-item"><span class="tl-date">2022 &mdash; 2026</span><h4>BUT GEA &mdash; GC2F</h4><p>IUT Rives de Seine (ex-Paris Descartes) &mdash; Comptabilit&eacute; approfondie, contr&ocirc;le de gestion.</p></div>
-          <div class="tl-item"><span class="tl-date">2021</span><h4>Baccalaur&eacute;at g&eacute;n&eacute;ral</h4><p>Mention Assez Bien.</p></div>
-        </div>
-      </div>
-      <div class="reveal">
-        <span class="eyebrow" style="color:var(--gold-bright);">En entreprise</span>
-        <h2 style="color:var(--cream-pure);">Exp&eacute;rience</h2>
-        <div class="timeline">
-          <div class="tl-item"><span class="tl-date">2025 &mdash; 2026</span><h4>Rexel France</h4><p>Apprenti Chef de Projet Finance &mdash; reporting P&amp;L, marge, stocks.</p></div>
-          <div class="tl-item"><span class="tl-date">2022 &mdash; 2025</span><h4>Nexans France</h4><p>Apprenti Analyste Credit Management &amp; Comptabilit&eacute; Fournisseur.</p></div>
-          <div class="tl-item"><span class="tl-date">2023 &mdash; 2025</span><h4>Conseil des &eacute;tudiants</h4><p>Repr&eacute;sentant administratif &mdash; IUT Rives de Seine.</p></div>
-        </div>
+    <div class="rev">
+      <p class="lead">Futur analyste en finance et contrôle de gestion, j'ai 22 ans et je termine un BUT en gestion comptable, fiscale et financière à l'IUT de Paris Rives de Seine.</p>
+      <p>Mon parcours mêle exigence académique et expérience de terrain. Trois ans en alternance chez Nexans, puis une année chez Rexel, m'ont donné une connaissance concrète de la comptabilité, du credit management et du reporting. À la rentrée, je rejoins un Master en finance, audit et contrôle de gestion.</p>
+      <p>Au delà des chiffres, je suis curieux de l'actualité économique, attaché à la course à pied et engagé dans la vie associative. J'avance avec méthode, sans me départir d'une certaine envie d'apprendre.</p>
+      <div class="chips" style="margin-top:18px">
+        <span class="chip">enderlin.alexandre@gmail.com</span>
+        <span class="chip">+33 6 14 82 19 49</span>
+        <span class="chip">LinkedIn</span>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="wrap">
-    <span class="eyebrow reveal">Bo&icirc;te &agrave; outils</span>
-    <h2 class="reveal">Comp&eacute;tences techniques &amp; transverses</h2>
-    <div class="grid grid-3" style="margin-top:30px;">
-      <div class="card reveal"><h3>Finance &amp; Compta</h3><p>Analyse des risques financiers, recouvrement de cr&eacute;ances, gestion de portefeuille clients, cl&ocirc;ture comptable, reporting financier, notions d'audit et contr&ocirc;le de gestion.</p></div>
-      <div class="card reveal"><h3>Outils num&eacute;riques</h3><p><span class="tag">Excel (TCD, VBA)</span><span class="tag">Power BI</span><span class="tag">SAP</span><span class="tag">Basware</span><span class="tag">Get Paid</span><span class="tag">Glovia</span></p></div>
-      <div class="card reveal"><h3>Savoir-&ecirc;tre</h3><p>Rigueur, organisation, esprit d'analyse, qualit&eacute; r&eacute;dactionnelle, capacit&eacute; d'adaptation, communication interpersonnelle.</p></div>
-      <div class="card reveal"><h3>Langues</h3><p><strong>Anglais</strong> &mdash; B2 interm&eacute;diaire<br><strong>Espagnol</strong> &mdash; B1 scolaire</p></div>
-      <div class="card reveal"><h3>Centres d'int&eacute;r&ecirc;t</h3><p>Actualit&eacute;s &eacute;conomiques, voyages culturels, course &agrave; pied (marathon de Montpellier).</p></div>
-      <div class="card reveal"><h3>Engagements</h3><p>B&eacute;n&eacute;vole Solidarit&eacute; Sida &middot; Tr&eacute;sorier de l'association Art'mony.</p></div>
+<hr class="rule">
+<section class="region">
+  <div class="shell" style="display:grid;grid-template-columns:1fr 1fr;gap:56px">
+    <div class="rev">
+      <span class="kicker">Formation</span>
+      <ul class="tl">
+        <li><span class="when">2026 à 2028</span><div><h4>Master finance</h4><p>Excelia Business School, parcours finance, audit et contrôle de gestion.</p></div></li>
+        <li><span class="when">2022 à 2026</span><div><h4>BUT GEA, parcours GC2F</h4><p>IUT Rives de Seine, comptabilité approfondie et contrôle de gestion.</p></div></li>
+        <li><span class="when">2021</span><div><h4>Baccalauréat général</h4><p>Mention assez bien.</p></div></li>
+      </ul>
     </div>
-    <div class="placeholder-note reveal" style="margin-top:30px;">Pensez &agrave; d&eacute;poser votre fichier <strong>CV_Alexandre_Enderlin.pdf</strong> &agrave; la racine du site pour activer le bouton de t&eacute;l&eacute;chargement.</div>
+    <div class="rev">
+      <span class="kicker">Expérience</span>
+      <ul class="tl">
+        <li><span class="when">2025 à 2026</span><div><h4>Rexel France</h4><p>Chef de projet finance, reporting et pilotage de filiale.</p></div></li>
+        <li><span class="when">2022 à 2025</span><div><h4>Nexans France</h4><p>Credit management et comptabilité fournisseur.</p></div></li>
+        <li><span class="when">2023 à 2025</span><div><h4>Conseil des étudiants</h4><p>Représentant administratif, IUT Rives de Seine.</p></div></li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<footer class="footer">
-  <div class="wrap footer-grid">
+<hr class="rule">
+<section class="region">
+  <div class="shell">
+    <span class="kicker rev">Boîte à outils</span>
+    <h2 class="rev" style="margin-bottom:40px">Compétences et savoir faire</h2>
+    <div class="cols rev">
+      <div class="blk"><h4>Finance &amp; comptabilité</h4><p>Analyse des risques, recouvrement de créances, gestion de portefeuille clients, clôture comptable, reporting financier, notions d'audit et de contrôle de gestion.</p></div>
+      <div class="blk"><h4>Outils numériques</h4><p>Excel (tableaux croisés, formules, VBA), Power BI, SAP, Basware, Get Paid, Glovia.</p></div>
+      <div class="blk"><h4>Manières de travailler</h4><p>Rigueur, organisation, esprit d'analyse, qualité rédactionnelle, capacité d'adaptation, communication interpersonnelle.</p></div>
+      <div class="blk"><h4>Langues</h4><p>Anglais, niveau B2 intermédiaire. Espagnol, niveau B1 scolaire.</p></div>
+      <div class="blk"><h4>Centres d'intérêt</h4><p>Actualité économique, voyages culturels, course à pied et marathon.</p></div>
+      <div class="blk"><h4>Engagements</h4><p>Bénévole pour Solidarité Sida, trésorier de l'association Art'mony.</p></div>
+    </div>
+    <p class="note rev">Pensez à déposer le fichier CV_Alexandre_Enderlin.pdf à la racine du dépôt pour activer le bouton de téléchargement.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="shell foot-grid">
     <div>
       <h3>Alexandre Enderlin</h3>
-      <p style="color:rgba(244,239,230,0.7)">Futur analyste junior &amp; contr&ocirc;le financier. &Agrave; la recherche d'une alternance en finance pour mon Master.</p>
+      <p>Gestion comptable, fiscale et financière. À la recherche d'une alternance en finance pour la rentrée prochaine.</p>
     </div>
     <div>
       <h3>Contact</h3>
-      <p style="color:rgba(244,239,230,0.7)"><a href="mailto:enderlin.alexandre@gmail.com">enderlin.alexandre@gmail.com</a><br>+33 6 14 82 19 49<br><a href="#">LinkedIn : Alexandre Enderlin</a></p>
+      <p><a href="mailto:enderlin.alexandre@gmail.com">enderlin.alexandre@gmail.com</a><br>+33 6 14 82 19 49<br><a href="#">LinkedIn</a></p>
     </div>
     <div>
-      <h3>Navigation</h3>
-      <p style="color:rgba(244,239,230,0.7)"><a href="competences.html">Comp&eacute;tences</a> &middot; <a href="experiences.html">Exp&eacute;riences</a><br><a href="a-cote.html">&Agrave; c&ocirc;t&eacute; des &eacute;tudes</a> &middot; <a href="qui-suis-je.html">Qui suis-je</a></p>
+      <h3>Pages</h3>
+      <p><a href="experiences.html">Expériences</a><br><a href="competences.html">Compétences</a><br><a href="a-cote.html">À côté</a><br><a href="qui-suis-je.html">Profil</a></p>
     </div>
   </div>
-  <div class="wrap"><div class="footer-bottom">&copy; 2026 Alexandre Enderlin &mdash; Portfolio r&eacute;alis&eacute; dans le cadre du BUT GEA, IUT de Paris Rives de Seine.</div></div>
+  <div class="shell"><div class="foot-base">Portfolio · BUT GEA · IUT de Paris Rives de Seine · 2026</div></div>
 </footer>
 <script src="script.js"></script>
 </body>

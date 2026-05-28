@@ -3,114 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>&Eacute;valuer &mdash; Alexandre Enderlin</title>
+<title>Évaluer · Alexandre Enderlin</title>
 <link rel="stylesheet" href="styles.css">
 <style>
-.page-hero { background: linear-gradient(135deg, var(--navy-deep), var(--navy)); color: var(--cream-pure); padding: 70px 0 60px; position:relative; overflow:hidden; }
-.page-hero::after { content:""; position:absolute; right:-5%; top:-30%; width:400px; height:400px; background:radial-gradient(circle,rgba(201,163,90,0.15),transparent 65%); border-radius:50%; }
-.page-hero .eyebrow { color: var(--gold-bright); }
-.page-hero h1 { color: var(--cream-pure); max-width: 800px; }
-.page-hero p { color: rgba(244,239,230,0.78); max-width: 680px; font-size: 1.12rem; margin-top: 16px; }
-.breadcrumb { font-size:0.82rem; color: var(--gold-bright); margin-bottom:18px; letter-spacing:0.5px; }
-.breadcrumb a { color: rgba(244,239,230,0.6); text-decoration:none; }
-.breadcrumb a:hover { color: var(--gold-bright); }
-.proof-box { background: var(--cream-pure); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 24px 28px; margin: 22px 0; }
-.proof-box h4 { font-family: var(--display); color: var(--navy); margin-bottom:8px; font-size:1.1rem; }
-.tag { display:inline-block; background: var(--navy); color: var(--cream-pure); font-size:0.72rem; letter-spacing:1px; text-transform:uppercase; padding:5px 12px; border-radius:50px; margin:3px 4px 3px 0; font-weight:600;}
-.tag.gold { background: var(--gold); color: var(--navy-deep);}
-.placeholder-note { background: rgba(201,163,90,0.1); border:1px dashed var(--gold); border-radius:10px; padding:14px 18px; font-size:0.88rem; color:#5a4a28; margin:18px 0; }
-ul.clean { list-style:none; padding:0; }
-ul.clean li { padding:10px 0 10px 28px; position:relative; border-bottom:1px solid var(--line); }
-ul.clean li:before { content:"&#9656;"; color:var(--gold); position:absolute; left:0; }
-.media-frame { aspect-ratio:16/9; background:linear-gradient(160deg,var(--navy-soft),var(--navy-deep)); border:1px solid var(--line); border-radius:14px; display:flex;align-items:center;justify-content:center; color:rgba(244,239,230,0.4); text-align:center; padding:20px; }
-.level-badge { display:inline-flex; align-items:center; gap:8px; background:var(--navy); color:var(--gold-bright); padding:8px 18px; border-radius:50px; font-size:0.82rem; font-weight:600; letter-spacing:0.5px; margin-bottom:20px;}
+.body-col{max-width:680px}
+.facts{display:flex;flex-wrap:wrap;gap:30px;margin:30px 0 0;font-family:var(--mono);font-size:0.76rem;letter-spacing:0.06em;color:var(--ink-faint)}
+.facts span{display:flex;flex-direction:column;gap:4px}
+.facts b{font-weight:400;color:var(--ink);font-size:0.92rem;letter-spacing:0}
+.back{margin-top:50px}
+
+.proof{border-top:1px solid var(--rule);padding:26px 0}
+.proof:last-of-type{border-bottom:1px solid var(--rule)}
+.proof h4{font-family:var(--serif);font-weight:500;font-size:1.2rem;margin-bottom:8px}
+.proof p{margin:0;color:var(--ink-soft);font-size:0.97rem}
+.lvl-tag{font-family:var(--mono);font-size:0.76rem;letter-spacing:0.1em;color:var(--accent);text-transform:uppercase;display:inline-block;margin-bottom:24px}
 </style>
 </head>
 <body>
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Alexandre <span>Enderlin</span></a>
-    <button class="nav-toggle" onclick="toggleMenu()">&#9776;</button>
-    <ul class="nav-links">
+<nav class="topbar">
+  <div class="topbar-in">
+    <a href="index.html" class="brand">Alexandre Enderlin<span class="dot">.</span></a>
+    <button class="burger" onclick="toggleMenu()">Menu</button>
+    <ul class="menu">
       <li><a href="index.html">Accueil</a></li>
-      <li><a href="experiences.html">Exp&eacute;riences &#65291;</a>
-        <ul class="dropdown-menu">
-          <li><a href="exp-rexel.html">Reporting &amp; pilotage &mdash; Rexel</a></li>
-          <li><a href="exp-nexans.html">Credit Management &mdash; Nexans</a></li>
-          <li><a href="exp-conseil.html">Conseil des &eacute;tudiants</a></li>
+      <li><a href="experiences.html">Expériences</a>
+        <ul class="sub">
+          <li><a href="exp-rexel.html">Rexel France</a></li>
+          <li><a href="exp-nexans.html">Nexans France</a></li>
+          <li><a href="exp-conseil.html">Conseil des étudiants</a></li>
           <li><a href="exp-sae.html">Projets &amp; SAE</a></li>
         </ul>
       </li>
-      <li><a href="competences.html" class="active">Comp&eacute;tences &#65291;</a>
-        <ul class="dropdown-menu">
+      <li><a href="competences.html" class="here">Compétences</a>
+        <ul class="sub">
           <li><a href="comp-analyser.html">Analyser</a></li>
-          <li><a href="comp-decider.html">D&eacute;cider</a></li>
+          <li><a href="comp-decider.html">Décider</a></li>
           <li><a href="comp-piloter.html">Piloter</a></li>
           <li><a href="comp-produire.html">Produire</a></li>
-          <li><a href="comp-evaluer.html">&Eacute;valuer</a></li>
+          <li><a href="comp-evaluer.html">Évaluer</a></li>
         </ul>
       </li>
-      <li><a href="a-cote.html">&Agrave; c&ocirc;t&eacute; &#65291;</a>
-        <ul class="dropdown-menu">
+      <li><a href="a-cote.html">À côté</a>
+        <ul class="sub">
           <li><a href="cote-course.html">Course &amp; marathon</a></li>
           <li><a href="cote-voyages.html">Carnet de voyage</a></li>
-          <li><a href="cote-engagement.html">Engagement &amp; b&eacute;n&eacute;volat</a></li>
+          <li><a href="cote-engagement.html">Engagement associatif</a></li>
         </ul>
       </li>
-      <li><a href="qui-suis-je.html">Qui suis-je ?</a></li>
+      <li><a href="qui-suis-je.html">Profil</a></li>
     </ul>
   </div>
 </nav>
-
-<header class="page-hero" style="background:linear-gradient(135deg,#0a1422,#1f3a5f33);">
-  <div class="wrap">
-    <div class="breadcrumb"><a href="index.html">Accueil</a> / <a href="competences.html">Comp&eacute;tences</a> / &Eacute;valuer</div>
-    <span class="eyebrow">Comp&eacute;tence GC2F</span>
-    <h1>&Eacute;valuer</h1>
-    <p>&Eacute;valuer l'activit&eacute; de l'organisation</p>
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="index-num rev" style="margin-bottom:2rem">Compétences / Évaluer</div>
+    <span class="kicker rev">Compétence GC2F</span>
+    <h1 class="rev" style="max-width:880px">Évaluer</h1>
+    <p class="lead rev" style="max-width:620px;margin-top:1.4rem">Évaluer l'activité de l'organisation</p>
   </div>
 </header>
-<section class="section">
-  <div class="wrap narrow">
-    <div class="level-badge reveal" style="background:#1f3a5f;color:#fff;">&#9733; Niveau 2 &mdash; Optimiser les outils d'analyse et de pr&eacute;vision de l'activit&eacute;</div>
-    <p class="lead reveal">&Eacute;valuer, c'est mesurer la rentabilit&eacute;, anticiper et b&acirc;tir des pr&eacute;visions. C'est la dimension la plus strat&eacute;gique de la finance, celle vers laquelle je veux orienter ma carri&egrave;re.</p>
-
-    <h2 class="reveal" style="margin:36px 0 14px;">Situations professionnelles</h2>
-    <ul class="clean reveal"><li>Dans des organisations de tailles et d'espaces g&eacute;ographiques diff&eacute;rents</li><li>Dans des organisations marchandes ou non marchandes</li></ul>
-
-    <h2 class="reveal" style="margin:36px 0 14px;">Apprentissages critiques vis&eacute;s</h2>
-    <ul class="clean reveal"><li>Identifier points forts et faibles en termes d'activit&eacute; et de structure financi&egrave;re (AC25.01)</li><li>Mettre en place une comptabilit&eacute; analytique et une gestion budg&eacute;taire (AC25.04)</li><li>&Eacute;valuer les r&eacute;sultats et performances par le contr&ocirc;le budg&eacute;taire (AC35.06)</li></ul>
-
-    <h2 class="reveal" style="margin:40px 0 8px;">Mes preuves</h2>
-    <p class="reveal" style="margin-bottom:18px;color:var(--muted);">Traces concr&egrave;tes et justification de la comp&eacute;tence.</p>
-    <div class="proof-box reveal"><h4>Pilotage des indicateurs de marge et de stocks (Rexel)</h4><p style="margin:0;">Chez Rexel, le suivi des indicateurs de marge et de stocks de la filiale Mavisun est une d&eacute;marche d'&eacute;valuation continue de l'activit&eacute;, orient&eacute;e vers l'optimisation des performances.</p></div><div class="proof-box reveal"><h4>Reporting P&amp;L et analyse de performance</h4><p style="margin:0;">L'&eacute;laboration des P&amp;L de filiale me conduit &agrave; identifier les points forts et faibles de l'activit&eacute; et &agrave; en &eacute;valuer la structure financi&egrave;re.</p></div><div class="proof-box reveal"><h4>Suivi des KPI financiers</h4><p style="margin:0;">Le travail r&eacute;current sur les KPI (DSO, encaissements, comptes d&eacute;biteurs) constitue un exercice permanent de contr&ocirc;le et d'&eacute;valuation de la performance.</p></div>
-    <div class="media-frame reveal" style="margin-top:24px;">Ajoutez ici une trace visuelle (capture d'&eacute;cran d'un reporting, extrait de tableau, livrable&hellip;)</div>
-
-    <div class="placeholder-note reveal">&Agrave; personnaliser : si vous avez construit un budget pr&eacute;visionnel ou un compte de r&eacute;sultat pr&eacute;visionnel (SAE), ajoutez-le, c'est central pour cette comp&eacute;tence.</div>
-
-    <h2 class="reveal" style="margin:36px 0 12px;">Exp&eacute;riences li&eacute;es</h2>
-    <p class="reveal"><a href="exp-rexel.html" class="tag">Rexel</a><a href="exp-nexans.html" class="tag">Nexans</a></p>
-
-    <div style="margin-top:36px;" class="reveal"><a href="competences.html" class="btn btn-outline">&larr; Toutes les comp&eacute;tences</a></div>
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <span class="lvl-tag rev">Niveau 2 · Optimiser les outils d'analyse et de prévision</span>
+    <div class="body-col">
+      <p class="lead rev">Évaluer, c'est mesurer la rentabilité, anticiper, construire des prévisions. C'est la dimension la plus stratégique de la finance, celle vers laquelle je veux orienter ma carrière.</p>
+      <span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
+      <ul class="stack rev"><li><span class="mk">·</span><span class="tx">Dans des organisations de tailles et d'espaces géographiques différents</span></li><li><span class="mk">·</span><span class="tx">Dans des organisations marchandes ou non marchandes</span></li></ul>
+      <span class="kicker rev" style="margin-top:44px">Apprentissages critiques visés</span>
+      <ul class="stack rev"><li><span class="mk">01</span><span class="tx">Identifier les points forts et faibles en activité et en structure financière</span></li><li><span class="mk">02</span><span class="tx">Mettre en place une comptabilité analytique et une gestion budgétaire</span></li><li><span class="mk">03</span><span class="tx">Évaluer les résultats et la performance par le contrôle budgétaire</span></li></ul>
+      <span class="kicker rev" style="margin-top:44px">Preuves</span>
+      <div class="proof rev"><h4>Le suivi de la marge et des stocks chez Rexel</h4><p>Le pilotage des indicateurs de la filiale Mavisun est une évaluation continue de l'activité, tournée vers l'optimisation des performances.</p></div><div class="proof rev"><h4>L'analyse du compte de résultat</h4><p>Élaborer les résultats de filiale me conduit à repérer les points forts et faibles de l'activité et à en évaluer la structure financière.</p></div><div class="proof rev"><h4>Le suivi des indicateurs financiers</h4><p>Le travail récurrent sur les délais de paiement et les encaissements constitue un exercice permanent de contrôle et d'évaluation.</p></div>
+      <div class="frame rev" style="margin-top:34px">Emplacement pour une trace visuelle</div>
+      <p class="note rev">À personnaliser : un budget ou un compte de résultat prévisionnel construit en SAE serait central pour cette compétence.</p>
+      <span class="kicker rev" style="margin-top:30px">Expériences liées</span>
+      <div class="chips rev"><a href="exp-rexel.html" class="chip">Rexel</a><a href="exp-nexans.html" class="chip">Nexans</a></div>
+      <div class="back rev"><a href="competences.html" class="link-arrow">Toutes les compétences</a></div>
+    </div>
   </div>
 </section>
 
-<footer class="footer">
-  <div class="wrap footer-grid">
+<footer class="foot">
+  <div class="shell foot-grid">
     <div>
       <h3>Alexandre Enderlin</h3>
-      <p style="color:rgba(244,239,230,0.7)">Futur analyste junior &amp; contr&ocirc;le financier. &Agrave; la recherche d'une alternance en finance pour mon Master.</p>
+      <p>Gestion comptable, fiscale et financière. À la recherche d'une alternance en finance pour la rentrée prochaine.</p>
     </div>
     <div>
       <h3>Contact</h3>
-      <p style="color:rgba(244,239,230,0.7)"><a href="mailto:enderlin.alexandre@gmail.com">enderlin.alexandre@gmail.com</a><br>+33 6 14 82 19 49<br><a href="#">LinkedIn : Alexandre Enderlin</a></p>
+      <p><a href="mailto:enderlin.alexandre@gmail.com">enderlin.alexandre@gmail.com</a><br>+33 6 14 82 19 49<br><a href="#">LinkedIn</a></p>
     </div>
     <div>
-      <h3>Navigation</h3>
-      <p style="color:rgba(244,239,230,0.7)"><a href="competences.html">Comp&eacute;tences</a> &middot; <a href="experiences.html">Exp&eacute;riences</a><br><a href="a-cote.html">&Agrave; c&ocirc;t&eacute; des &eacute;tudes</a> &middot; <a href="qui-suis-je.html">Qui suis-je</a></p>
+      <h3>Pages</h3>
+      <p><a href="experiences.html">Expériences</a><br><a href="competences.html">Compétences</a><br><a href="a-cote.html">À côté</a><br><a href="qui-suis-je.html">Profil</a></p>
     </div>
   </div>
-  <div class="wrap"><div class="footer-bottom">&copy; 2026 Alexandre Enderlin &mdash; Portfolio r&eacute;alis&eacute; dans le cadre du BUT GEA, IUT de Paris Rives de Seine.</div></div>
+  <div class="shell"><div class="foot-base">Portfolio · BUT GEA · IUT de Paris Rives de Seine · 2026</div></div>
 </footer>
 <script src="script.js"></script>
 </body>

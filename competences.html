@@ -3,141 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Comp&eacute;tences &mdash; Alexandre Enderlin</title>
+<title>Compétences · Alexandre Enderlin</title>
 <link rel="stylesheet" href="styles.css">
 <style>
-.page-hero { background: linear-gradient(135deg, var(--navy-deep), var(--navy)); color: var(--cream-pure); padding: 70px 0 60px; position:relative; overflow:hidden; }
-.page-hero::after { content:""; position:absolute; right:-5%; top:-30%; width:400px; height:400px; background:radial-gradient(circle,rgba(201,163,90,0.15),transparent 65%); border-radius:50%; }
-.page-hero .eyebrow { color: var(--gold-bright); }
-.page-hero h1 { color: var(--cream-pure); max-width: 800px; }
-.page-hero p { color: rgba(244,239,230,0.78); max-width: 680px; font-size: 1.12rem; margin-top: 16px; }
-.breadcrumb { font-size:0.82rem; color: var(--gold-bright); margin-bottom:18px; letter-spacing:0.5px; }
-.breadcrumb a { color: rgba(244,239,230,0.6); text-decoration:none; }
-.breadcrumb a:hover { color: var(--gold-bright); }
-.proof-box { background: var(--cream-pure); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 24px 28px; margin: 22px 0; }
-.proof-box h4 { font-family: var(--display); color: var(--navy); margin-bottom:8px; font-size:1.1rem; }
-.tag { display:inline-block; background: var(--navy); color: var(--cream-pure); font-size:0.72rem; letter-spacing:1px; text-transform:uppercase; padding:5px 12px; border-radius:50px; margin:3px 4px 3px 0; font-weight:600;}
-.tag.gold { background: var(--gold); color: var(--navy-deep);}
-.placeholder-note { background: rgba(201,163,90,0.1); border:1px dashed var(--gold); border-radius:10px; padding:14px 18px; font-size:0.88rem; color:#5a4a28; margin:18px 0; }
-ul.clean { list-style:none; padding:0; }
-ul.clean li { padding:10px 0 10px 28px; position:relative; border-bottom:1px solid var(--line); }
-ul.clean li:before { content:"&#9656;"; color:var(--gold); position:absolute; left:0; }
-.media-frame { aspect-ratio:16/9; background:linear-gradient(160deg,var(--navy-soft),var(--navy-deep)); border:1px solid var(--line); border-radius:14px; display:flex;align-items:center;justify-content:center; color:rgba(244,239,230,0.4); text-align:center; padding:20px; }
-.level-badge { display:inline-flex; align-items:center; gap:8px; background:var(--navy); color:var(--gold-bright); padding:8px 18px; border-radius:50px; font-size:0.82rem; font-weight:600; letter-spacing:0.5px; margin-bottom:20px;}
-
-.comp-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-.comp-card { position:relative; background:var(--cream-pure); border:1px solid var(--line); border-top:5px solid var(--c); border-radius:14px; padding:30px 26px; text-decoration:none; color:inherit; transition:all .3s ease; display:flex; flex-direction:column; }
-.comp-card:hover { transform:translateY(-6px); box-shadow:var(--shadow); }
-.comp-num { font-family:var(--display); font-size:2.6rem; color:var(--c); opacity:0.85; line-height:1; }
-.comp-card h3 { color:var(--c); margin:6px 0 10px; font-size:1.5rem; }
-.comp-desc { font-size:0.9rem; color:#444; flex-grow:1; }
-.comp-level { display:inline-block; font-size:0.74rem; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:var(--navy); background:rgba(14,27,46,0.07); padding:6px 12px; border-radius:50px; margin:14px 0 12px; }
-.comp-go { color:var(--c); font-weight:700; font-size:0.9rem; }
-@media(max-width:900px){ .comp-grid{grid-template-columns:1fr;} }
+.comp-list{list-style:none;border-top:1px solid var(--rule)}
+.comp-list li{border-bottom:1px solid var(--rule)}
+.comp-list a{display:grid;grid-template-columns:0.5fr 1.4fr 0.9fr;gap:24px;align-items:baseline;padding:36px 0;text-decoration:none;color:var(--ink);transition:padding-left .25s ease}
+.comp-list a:hover{padding-left:18px}
+.comp-list .no{font-family:var(--serif);font-size:2.4rem;color:var(--ink-faint);line-height:1}
+.comp-list h3{font-size:1.8rem}
+.comp-list .desc{font-size:0.92rem;color:var(--ink-soft);margin-top:6px}
+.comp-list .lvl{font-family:var(--mono);font-size:0.74rem;letter-spacing:0.08em;color:var(--accent);text-align:right}
+@media(max-width:760px){.comp-list a{grid-template-columns:0.3fr 1fr}.comp-list .lvl{grid-column:2;text-align:left;margin-top:8px}}
 </style>
 </head>
 <body>
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Alexandre <span>Enderlin</span></a>
-    <button class="nav-toggle" onclick="toggleMenu()">&#9776;</button>
-    <ul class="nav-links">
+<nav class="topbar">
+  <div class="topbar-in">
+    <a href="index.html" class="brand">Alexandre Enderlin<span class="dot">.</span></a>
+    <button class="burger" onclick="toggleMenu()">Menu</button>
+    <ul class="menu">
       <li><a href="index.html">Accueil</a></li>
-      <li><a href="experiences.html">Exp&eacute;riences &#65291;</a>
-        <ul class="dropdown-menu">
-          <li><a href="exp-rexel.html">Reporting &amp; pilotage &mdash; Rexel</a></li>
-          <li><a href="exp-nexans.html">Credit Management &mdash; Nexans</a></li>
-          <li><a href="exp-conseil.html">Conseil des &eacute;tudiants</a></li>
+      <li><a href="experiences.html">Expériences</a>
+        <ul class="sub">
+          <li><a href="exp-rexel.html">Rexel France</a></li>
+          <li><a href="exp-nexans.html">Nexans France</a></li>
+          <li><a href="exp-conseil.html">Conseil des étudiants</a></li>
           <li><a href="exp-sae.html">Projets &amp; SAE</a></li>
         </ul>
       </li>
-      <li><a href="competences.html" class="active">Comp&eacute;tences &#65291;</a>
-        <ul class="dropdown-menu">
+      <li><a href="competences.html" class="here">Compétences</a>
+        <ul class="sub">
           <li><a href="comp-analyser.html">Analyser</a></li>
-          <li><a href="comp-decider.html">D&eacute;cider</a></li>
+          <li><a href="comp-decider.html">Décider</a></li>
           <li><a href="comp-piloter.html">Piloter</a></li>
           <li><a href="comp-produire.html">Produire</a></li>
-          <li><a href="comp-evaluer.html">&Eacute;valuer</a></li>
+          <li><a href="comp-evaluer.html">Évaluer</a></li>
         </ul>
       </li>
-      <li><a href="a-cote.html">&Agrave; c&ocirc;t&eacute; &#65291;</a>
-        <ul class="dropdown-menu">
+      <li><a href="a-cote.html">À côté</a>
+        <ul class="sub">
           <li><a href="cote-course.html">Course &amp; marathon</a></li>
           <li><a href="cote-voyages.html">Carnet de voyage</a></li>
-          <li><a href="cote-engagement.html">Engagement &amp; b&eacute;n&eacute;volat</a></li>
+          <li><a href="cote-engagement.html">Engagement associatif</a></li>
         </ul>
       </li>
-      <li><a href="qui-suis-je.html">Qui suis-je ?</a></li>
+      <li><a href="qui-suis-je.html">Profil</a></li>
     </ul>
   </div>
 </nav>
-
-<header class="page-hero">
-  <div class="wrap">
-    <div class="breadcrumb"><a href="index.html">Accueil</a> / Comp&eacute;tences</div>
-    <span class="eyebrow">Entr&eacute;e par comp&eacute;tence</span>
-    <h1>Les 5 comp&eacute;tences GC2F</h1>
-    <p>Le r&eacute;f&eacute;rentiel du BUT Gestion comptable, fiscale et financi&egrave;re s'articule autour de cinq comp&eacute;tences. Pour chacune, je pr&eacute;sente le niveau atteint et les <strong>preuves</strong> issues de mes exp&eacute;riences.</p>
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="index-num rev" style="margin-bottom:2rem">Compétences</div>
+    <span class="kicker rev">Entrée par compétence</span>
+    <h1 class="rev" style="max-width:880px">Les cinq compétences<br>du référentiel GC2F.</h1>
+    <p class="lead rev" style="max-width:620px;margin-top:1.4rem">Pour chacune, le niveau visé dans la formation et les preuves tirées de mes expériences. On accède aux mêmes preuves par activité depuis la page Expériences.</p>
   </div>
 </header>
-<section class="section">
-  <div class="wrap">
-    <div class="comp-grid">
-      <a href="comp-analyser.html" class="comp-card reveal" style="--c:#c0392b;">
-        <span class="comp-num">01</span>
-        <h3>Analyser</h3>
-        <p class="comp-desc">Analyser les processus de l'organisation dans son environnement</p>
-        <span class="comp-level">Niveau 2 &mdash; &Eacute;valuer les processus</span>
-        <span class="comp-go">Voir les preuves &rarr;</span>
-      </a>
-      <a href="comp-decider.html" class="comp-card reveal" style="--c:#e07b39;">
-        <span class="comp-num">02</span>
-        <h3>D&eacute;cider</h3>
-        <p class="comp-desc">Aider &agrave; la prise de d&eacute;cision</p>
-        <span class="comp-level">Niveau 3 &mdash; Concourir &agrave; la d&eacute;cision</span>
-        <span class="comp-go">Voir les preuves &rarr;</span>
-      </a>
-      <a href="comp-piloter.html" class="comp-card reveal" style="--c:#e6b800;">
-        <span class="comp-num">03</span>
-        <h3>Piloter</h3>
-        <p class="comp-desc">Piloter les relations avec les parties prenantes</p>
-        <span class="comp-level">Niveau 3 &mdash; Am&eacute;liorer les relations</span>
-        <span class="comp-go">Voir les preuves &rarr;</span>
-      </a>
-      <a href="comp-produire.html" class="comp-card reveal" style="--c:#7cb342;">
-        <span class="comp-num">04</span>
-        <h3>Produire</h3>
-        <p class="comp-desc">Produire l'information comptable, fiscale et sociale</p>
-        <span class="comp-level">Niveau 2 &mdash; Optimiser l'information</span>
-        <span class="comp-go">Voir les preuves &rarr;</span>
-      </a>
-      <a href="comp-evaluer.html" class="comp-card reveal" style="--c:#1f3a5f;">
-        <span class="comp-num">05</span>
-        <h3>&Eacute;valuer</h3>
-        <p class="comp-desc">&Eacute;valuer l'activit&eacute; de l'organisation</p>
-        <span class="comp-level">Niveau 2 &mdash; Optimiser les outils</span>
-        <span class="comp-go">Voir les preuves &rarr;</span>
-      </a></div>
-    <div class="placeholder-note" style="margin-top:40px;">Double entr&eacute;e respect&eacute;e (consigne IUT) : on acc&egrave;de aux preuves <strong>par comp&eacute;tence</strong> ici, et <strong>par activit&eacute;</strong> via la page <a href="experiences.html">Exp&eacute;riences</a>. Chaque fiche comp&eacute;tence renvoie aux exp&eacute;riences concern&eacute;es.</div>
+<section class="region" style="padding-top:clamp(40px,6vw,70px)">
+  <div class="shell">
+    <ul class="comp-list"><li class="rev"><a href="comp-analyser.html"><span class="no">1</span><div><h3>Analyser</h3><div class="desc">Analyser les processus de l'organisation dans son environnement</div></div><span class="lvl">Niveau 2</span></a></li><li class="rev"><a href="comp-decider.html"><span class="no">2</span><div><h3>Décider</h3><div class="desc">Aider à la prise de décision</div></div><span class="lvl">Niveau 3</span></a></li><li class="rev"><a href="comp-piloter.html"><span class="no">3</span><div><h3>Piloter</h3><div class="desc">Piloter les relations avec les parties prenantes</div></div><span class="lvl">Niveau 3</span></a></li><li class="rev"><a href="comp-produire.html"><span class="no">4</span><div><h3>Produire</h3><div class="desc">Produire l'information comptable, fiscale et sociale</div></div><span class="lvl">Niveau 2</span></a></li><li class="rev"><a href="comp-evaluer.html"><span class="no">5</span><div><h3>Évaluer</h3><div class="desc">Évaluer l'activité de l'organisation</div></div><span class="lvl">Niveau 2</span></a></li></ul>
   </div>
 </section>
 
-<footer class="footer">
-  <div class="wrap footer-grid">
+<footer class="foot">
+  <div class="shell foot-grid">
     <div>
       <h3>Alexandre Enderlin</h3>
-      <p style="color:rgba(244,239,230,0.7)">Futur analyste junior &amp; contr&ocirc;le financier. &Agrave; la recherche d'une alternance en finance pour mon Master.</p>
+      <p>Gestion comptable, fiscale et financière. À la recherche d'une alternance en finance pour la rentrée prochaine.</p>
     </div>
     <div>
       <h3>Contact</h3>
-      <p style="color:rgba(244,239,230,0.7)"><a href="mailto:enderlin.alexandre@gmail.com">enderlin.alexandre@gmail.com</a><br>+33 6 14 82 19 49<br><a href="#">LinkedIn : Alexandre Enderlin</a></p>
+      <p><a href="mailto:enderlin.alexandre@gmail.com">enderlin.alexandre@gmail.com</a><br>+33 6 14 82 19 49<br><a href="#">LinkedIn</a></p>
     </div>
     <div>
-      <h3>Navigation</h3>
-      <p style="color:rgba(244,239,230,0.7)"><a href="competences.html">Comp&eacute;tences</a> &middot; <a href="experiences.html">Exp&eacute;riences</a><br><a href="a-cote.html">&Agrave; c&ocirc;t&eacute; des &eacute;tudes</a> &middot; <a href="qui-suis-je.html">Qui suis-je</a></p>
+      <h3>Pages</h3>
+      <p><a href="experiences.html">Expériences</a><br><a href="competences.html">Compétences</a><br><a href="a-cote.html">À côté</a><br><a href="qui-suis-je.html">Profil</a></p>
     </div>
   </div>
-  <div class="wrap"><div class="footer-bottom">&copy; 2026 Alexandre Enderlin &mdash; Portfolio r&eacute;alis&eacute; dans le cadre du BUT GEA, IUT de Paris Rives de Seine.</div></div>
+  <div class="shell"><div class="foot-base">Portfolio · BUT GEA · IUT de Paris Rives de Seine · 2026</div></div>
 </footer>
 <script src="script.js"></script>
 </body>
