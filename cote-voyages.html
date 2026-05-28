@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carnet de voyage &mdash; Alexandre Enderlin</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+.page-hero { background: linear-gradient(135deg, var(--navy-deep), var(--navy)); color: var(--cream-pure); padding: 70px 0 60px; position:relative; overflow:hidden; }
+.page-hero::after { content:""; position:absolute; right:-5%; top:-30%; width:400px; height:400px; background:radial-gradient(circle,rgba(201,163,90,0.15),transparent 65%); border-radius:50%; }
+.page-hero .eyebrow { color: var(--gold-bright); }
+.page-hero h1 { color: var(--cream-pure); max-width: 800px; }
+.page-hero p { color: rgba(244,239,230,0.78); max-width: 680px; font-size: 1.12rem; margin-top: 16px; }
+.breadcrumb { font-size:0.82rem; color: var(--gold-bright); margin-bottom:18px; letter-spacing:0.5px; }
+.breadcrumb a { color: rgba(244,239,230,0.6); text-decoration:none; }
+.breadcrumb a:hover { color: var(--gold-bright); }
+.proof-box { background: var(--cream-pure); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 24px 28px; margin: 22px 0; }
+.proof-box h4 { font-family: var(--display); color: var(--navy); margin-bottom:8px; font-size:1.1rem; }
+.tag { display:inline-block; background: var(--navy); color: var(--cream-pure); font-size:0.72rem; letter-spacing:1px; text-transform:uppercase; padding:5px 12px; border-radius:50px; margin:3px 4px 3px 0; font-weight:600;}
+.tag.gold { background: var(--gold); color: var(--navy-deep);}
+.placeholder-note { background: rgba(201,163,90,0.1); border:1px dashed var(--gold); border-radius:10px; padding:14px 18px; font-size:0.88rem; color:#5a4a28; margin:18px 0; }
+ul.clean { list-style:none; padding:0; }
+ul.clean li { padding:10px 0 10px 28px; position:relative; border-bottom:1px solid var(--line); }
+ul.clean li:before { content:"&#9656;"; color:var(--gold); position:absolute; left:0; }
+.media-frame { aspect-ratio:16/9; background:linear-gradient(160deg,var(--navy-soft),var(--navy-deep)); border:1px solid var(--line); border-radius:14px; display:flex;align-items:center;justify-content:center; color:rgba(244,239,230,0.4); text-align:center; padding:20px; }
+.level-badge { display:inline-flex; align-items:center; gap:8px; background:var(--navy); color:var(--gold-bright); padding:8px 18px; border-radius:50px; font-size:0.82rem; font-weight:600; letter-spacing:0.5px; margin-bottom:20px;}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Alexandre <span>Enderlin</span></a>
+    <button class="nav-toggle" onclick="toggleMenu()">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="experiences.html">Exp&eacute;riences &#65291;</a>
+        <ul class="dropdown-menu">
+          <li><a href="exp-rexel.html">Reporting &amp; pilotage &mdash; Rexel</a></li>
+          <li><a href="exp-nexans.html">Credit Management &mdash; Nexans</a></li>
+          <li><a href="exp-conseil.html">Conseil des &eacute;tudiants</a></li>
+          <li><a href="exp-sae.html">Projets &amp; SAE</a></li>
+        </ul>
+      </li>
+      <li><a href="competences.html">Comp&eacute;tences &#65291;</a>
+        <ul class="dropdown-menu">
+          <li><a href="comp-analyser.html">Analyser</a></li>
+          <li><a href="comp-decider.html">D&eacute;cider</a></li>
+          <li><a href="comp-piloter.html">Piloter</a></li>
+          <li><a href="comp-produire.html">Produire</a></li>
+          <li><a href="comp-evaluer.html">&Eacute;valuer</a></li>
+        </ul>
+      </li>
+      <li><a href="a-cote.html" class="active">&Agrave; c&ocirc;t&eacute; &#65291;</a>
+        <ul class="dropdown-menu">
+          <li><a href="cote-course.html">Course &amp; marathon</a></li>
+          <li><a href="cote-voyages.html">Carnet de voyage</a></li>
+          <li><a href="cote-engagement.html">Engagement &amp; b&eacute;n&eacute;volat</a></li>
+        </ul>
+      </li>
+      <li><a href="qui-suis-je.html">Qui suis-je ?</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-hero" style="background:linear-gradient(135deg,#0a1422,#16263d);">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Accueil</a> / <a href="a-cote.html">&Agrave; c&ocirc;t&eacute;</a> / Carnet de voyage</div>
+    <span class="eyebrow">&#9992; &nbsp;&Agrave; c&ocirc;t&eacute; des &eacute;tudes</span>
+    <h1>Carnet de voyage</h1>
+  </div>
+</header>
+<section class="section">
+  <div class="wrap narrow">
+    <p class="lead reveal">Les voyages culturels &eacute;largissent mon regard et nourrissent ma curiosit&eacute; pour les organisations et les cultures.</p>
+    <div class="reveal"><p>Chaque voyage est une le&ccedil;on d'adaptation et d'ouverture. D&eacute;couvrir d'autres fa&ccedil;ons de vivre et de travailler aiguise ma capacit&eacute; &agrave; comprendre des environnements vari&eacute;s &mdash; une qualit&eacute; pr&eacute;cieuse dans des groupes internationaux comme Nexans ou Rexel.</p><p>Ajoutez ici vos destinations marquantes et ce qu'elles vous ont appris.</p></div>
+    <div class="media-frame reveal" style="margin:24px 0;">Ajoutez ici une ou plusieurs photos</div>
+    <div class="placeholder-note reveal">&Agrave; personnaliser : listez vos destinations, ajoutez des photos et une anecdote par voyage.</div>
+    <div style="margin-top:30px;" class="reveal"><a href="a-cote.html" class="btn btn-outline">&larr; Retour</a></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div>
+      <h3>Alexandre Enderlin</h3>
+      <p style="color:rgba(244,239,230,0.7)">Futur analyste junior &amp; contr&ocirc;le financier. &Agrave; la recherche d'une alternance en finance pour mon Master.</p>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <p style="color:rgba(244,239,230,0.7)"><a href="mailto:enderlin.alexandre@gmail.com">enderlin.alexandre@gmail.com</a><br>+33 6 14 82 19 49<br><a href="#">LinkedIn : Alexandre Enderlin</a></p>
+    </div>
+    <div>
+      <h3>Navigation</h3>
+      <p style="color:rgba(244,239,230,0.7)"><a href="competences.html">Comp&eacute;tences</a> &middot; <a href="experiences.html">Exp&eacute;riences</a><br><a href="a-cote.html">&Agrave; c&ocirc;t&eacute; des &eacute;tudes</a> &middot; <a href="qui-suis-je.html">Qui suis-je</a></p>
+    </div>
+  </div>
+  <div class="wrap"><div class="footer-bottom">&copy; 2026 Alexandre Enderlin &mdash; Portfolio r&eacute;alis&eacute; dans le cadre du BUT GEA, IUT de Paris Rives de Seine.</div></div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

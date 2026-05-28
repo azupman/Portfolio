@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alexandre Enderlin — Portfolio</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .hero {
+    min-height: calc(100vh - 70px);
+    background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 55%, var(--navy-soft) 100%);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -10%; top: 50%;
+    transform: translateY(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,163,90,0.18) 0%, transparent 65%);
+    border-radius: 50%;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 60px; align-items: center; }
+  .hero-text { z-index: 2; }
+  .hero .eyebrow { color: var(--gold-bright); }
+  .hero h1 { color: var(--cream-pure); margin-bottom: 22px; }
+  .hero h1 .accent { color: var(--gold); font-style: italic; }
+  .hero p { color: rgba(244,239,230,0.78); font-size: 1.15rem; max-width: 540px; }
+  .hero-cta { display: flex; gap: 16px; margin-top: 36px; flex-wrap: wrap; }
+  .portrait-frame {
+    z-index: 2;
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: 18px;
+    background: linear-gradient(160deg, var(--navy-soft), var(--navy-deep));
+    border: 1px solid rgba(201,163,90,0.3);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .portrait-frame .placeholder { text-align: center; color: rgba(244,239,230,0.4); padding: 30px; }
+  .portrait-frame .placeholder .ico { font-size: 3rem; margin-bottom: 10px; }
+  .portrait-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Pitch section */
+  .pitch-card {
+    background: var(--cream-pure);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 48px;
+    box-shadow: var(--shadow);
+  }
+  .pitch-card .quote-mark { font-family: var(--display); font-size: 4rem; color: var(--gold); line-height: 0.4; }
+
+  /* Doors */
+  .doors { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+  .door {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 50px 36px;
+    text-decoration: none;
+    color: var(--cream-pure);
+    background: var(--navy);
+    border: 1px solid var(--line);
+    transition: all 0.35s ease;
+    min-height: 220px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .door:nth-child(2) { background: var(--gold); color: var(--navy-deep); }
+  .door:hover { transform: translateY(-6px) scale(1.01); box-shadow: var(--shadow); }
+  .door .door-num { position: absolute; top: 24px; right: 30px; font-family: var(--display); font-size: 3rem; opacity: 0.25; }
+  .door h3 { color: inherit; font-size: 1.6rem; margin-bottom: 8px; }
+  .door p { color: inherit; opacity: 0.85; margin: 0; font-size: 0.95rem; }
+  .door .arrow { margin-top: 16px; font-weight: 700; letter-spacing: 1px; }
+
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} .portrait-frame{max-width:320px;margin:0 auto;} .doors{grid-template-columns:1fr;} .pitch-card{padding:30px;} }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Alexandre <span>Enderlin</span></a>
+    <button class="nav-toggle" onclick="toggleMenu()">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li><a href="experiences.html">Expériences ＋</a>
+        <ul class="dropdown-menu">
+          <li><a href="exp-rexel.html">Reporting & pilotage — Rexel</a></li>
+          <li><a href="exp-nexans.html">Credit Management — Nexans</a></li>
+          <li><a href="exp-conseil.html">Conseil des étudiants</a></li>
+          <li><a href="exp-sae.html">Projets & SAE</a></li>
+        </ul>
+      </li>
+      <li><a href="competences.html">Compétences ＋</a>
+        <ul class="dropdown-menu">
+          <li><a href="comp-analyser.html">Analyser</a></li>
+          <li><a href="comp-decider.html">Décider</a></li>
+          <li><a href="comp-piloter.html">Piloter</a></li>
+          <li><a href="comp-produire.html">Produire</a></li>
+          <li><a href="comp-evaluer.html">Évaluer</a></li>
+        </ul>
+      </li>
+      <li><a href="a-cote.html">À côté ＋</a>
+        <ul class="dropdown-menu">
+          <li><a href="cote-course.html">Course & marathon</a></li>
+          <li><a href="cote-voyages.html">Carnet de voyage</a></li>
+          <li><a href="cote-engagement.html">Engagement & bénévolat</a></li>
+        </ul>
+      </li>
+      <li><a href="qui-suis-je.html">Qui suis-je ?</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text reveal">
+      <span class="eyebrow">Portfolio professionnel · BUT GC2F</span>
+      <h1>Analyser les chiffres,<br><span class="accent">éclairer</span> les décisions.</h1>
+      <p>Étudiant en gestion comptable, fiscale et financière, je transforme la donnée financière en leviers de décision. Bienvenue dans mon univers académique, professionnel et personnel.</p>
+      <div class="hero-cta">
+        <a href="competences.html" class="btn btn-gold">Découvrir mes compétences</a>
+        <a href="qui-suis-je.html" class="btn btn-outline" style="color:var(--cream-pure);border-color:var(--cream)">Qui suis-je ?</a>
+      </div>
+    </div>
+    <div class="portrait-frame reveal">
+      <!-- Remplacez par votre photo : <img src="photo.jpg" alt="Alexandre Enderlin"> -->
+      <div class="placeholder">
+        <div class="ico">📷</div>
+        <div>Insérez votre<br>photo ici</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PITCH -->
+<section class="section">
+  <div class="wrap narrow">
+    <span class="eyebrow reveal">Mon pitch en 2 minutes</span>
+    <div class="pitch-card reveal">
+      <div class="quote-mark">"</div>
+      <p class="lead">Bonjour, je suis <strong>Alexandre Enderlin</strong>, étudiant en BUT Gestion comptable, fiscale et financière à l'IUT de Paris Rives de Seine, et futur étudiant en Master Finance, Audit & Contrôle de Gestion.</p>
+      <p>Au fil de mes alternances chez <strong>Nexans</strong> puis <strong>Rexel</strong>, j'ai construit une expertise concrète en credit management, comptabilité fournisseur et reporting financier. J'aime ce moment précis où une colonne de chiffres devient une information utile : un KPI qui alerte, un reporting qui éclaire, une marge qu'on peut optimiser.</p>
+      <p>Rigoureux, organisé et curieux des outils numériques (Excel/VBA, Power BI, SAP), je recherche une alternance qui me permettra d'allier analyse financière, pilotage de la performance et esprit d'initiative. Ce portfolio retrace les preuves de ce que je sais faire.</p>
+      <p style="margin-bottom:0;color:var(--muted);font-style:italic;font-size:0.92rem;">→ Texte d'exemple rédigé à partir de votre CV. Modifiez-le librement, c'est aussi votre script vidéo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DOORS -->
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <span class="eyebrow reveal">Choisissez votre approche</span>
+    <h2 class="reveal">Deux portes d'entrée vers mon parcours</h2>
+    <div class="doors">
+      <a href="experiences.html" class="door reveal">
+        <span class="door-num">01</span>
+        <h3>Par expériences</h3>
+        <p>Mes missions concrètes en entreprise et mes projets universitaires (SAE), mis en récit.</p>
+        <span class="arrow">Explorer →</span>
+      </a>
+      <a href="competences.html" class="door reveal">
+        <span class="door-num">02</span>
+        <h3>Par compétences</h3>
+        <p>Les 5 compétences GC2F — Analyser, Décider, Piloter, Produire, Évaluer — et leurs preuves.</p>
+        <span class="arrow">Explorer →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div>
+      <h3>Alexandre Enderlin</h3>
+      <p style="color:rgba(244,239,230,0.7)">Futur analyste junior & contrôle financier. À la recherche d'une alternance en finance pour mon Master.</p>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <p style="color:rgba(244,239,230,0.7)"><a href="mailto:enderlin.alexandre@gmail.com">enderlin.alexandre@gmail.com</a><br>+33 6 14 82 19 49<br><a href="#">LinkedIn : Alexandre Enderlin</a></p>
+    </div>
+    <div>
+      <h3>Navigation</h3>
+      <p style="color:rgba(244,239,230,0.7)"><a href="competences.html">Compétences</a> · <a href="experiences.html">Expériences</a><br><a href="a-cote.html">À côté des études</a> · <a href="qui-suis-je.html">Qui suis-je</a></p>
+    </div>
+  </div>
+  <div class="wrap"><div class="footer-bottom">© 2026 Alexandre Enderlin — Portfolio réalisé dans le cadre du BUT GEA, IUT de Paris Rives de Seine.</div></div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
