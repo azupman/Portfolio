@@ -7,10 +7,30 @@
 <link rel="stylesheet" href="styles.css">
 <style>
 .body-col{max-width:680px}
-.facts{display:flex;flex-wrap:wrap;gap:30px;margin:30px 0 0;font-family:var(--mono);font-size:0.76rem;letter-spacing:0.06em;color:var(--ink-faint)}
-.facts span{display:flex;flex-direction:column;gap:4px}
-.facts b{font-weight:400;color:var(--ink);font-size:0.92rem;letter-spacing:0}
 .back{margin-top:50px}
+/* résultats */
+.results{border-top:1px solid var(--rule);margin-top:8px}
+.results .row{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--rule)}
+.results .lbl{font-family:var(--mono);font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint)}
+.results .val{font-family:var(--serif);font-size:1.35rem;color:var(--ink)}
+.results .val .u{font-family:var(--mono);font-size:0.78rem;color:var(--ink-faint);letter-spacing:0.04em;margin-left:4px}
+.results .val .acc{color:var(--accent)}
+/* galerie */
+.gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin:10px 0}
+.gallery figure{margin:0;overflow:hidden;background:var(--paper-2);border:1px solid var(--rule)}
+.gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.gallery figure:hover img{transform:scale(1.04)}
+.gallery .tall{grid-column:span 2;grid-row:span 2;aspect-ratio:3/4}
+.gallery .wide{grid-column:span 4;aspect-ratio:3/2}
+.gallery .sq{grid-column:span 2;aspect-ratio:3/4}
+.cap{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.06em;color:var(--ink-faint);margin-top:8px}
+@media(max-width:760px){
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .gallery .tall,.gallery .wide,.gallery .sq{grid-column:span 2;grid-row:auto;aspect-ratio:3/2}
+}
+@media(max-width:760px){
+  .shell[style*="grid-template-columns:0.9fr"]{grid-template-columns:1fr !important;gap:36px !important}
+}
 </style>
 </head>
 <body>
@@ -51,20 +71,44 @@
 <header class="region" style="padding-bottom:0">
   <div class="shell">
     <div class="index-num rev" style="margin-bottom:2rem">À côté / Course &amp; marathon</div>
-    <span class="kicker rev">Sport</span>
-    <h1 class="rev" style="max-width:880px">Course &amp; marathon</h1>
+    <span class="kicker rev">Sport · Montpellier Run Festival</span>
+    <h1 class="rev" style="max-width:880px">42,195 km, et tout ce qu'il a fallu pour y arriver.</h1>
     <p class="lead rev" style="max-width:620px;margin-top:1.4rem">Courir, c'est ma façon d'entretenir la constance et la patience qui me définissent aussi au travail.</p>
   </div>
 </header>
+
 <section class="region" style="padding-top:clamp(34px,5vw,60px)">
   <div class="shell">
-    <div class="body-col">
-      <p class="rev">J'ai couru le marathon de Montpellier. Quarante deux kilomètres, c'est un projet en soi : un plan, une préparation quotidienne et la capacité à tenir un objectif dans la durée.</p><p class="rev">Ce sont exactement les qualités que je retrouve dans ma vie professionnelle, la régularité, l'anticipation et le calme face à l'effort prolongé.</p>
-      <div class="frame rev" style="margin:30px 0">Emplacement pour une ou plusieurs photos</div>
-      <p class="note rev">À personnaliser : votre temps, vos prochaines courses, ce qui vous a donné envie de commencer.</p>
-      <div class="back rev"><a href="a-cote.html" class="link-arrow">Retour</a></div>
+    <div class="gallery rev">
+      <figure class="tall"><img src="images/marathon-course-1.jpg" alt="En course sur le marathon de Montpellier" loading="lazy"></figure>
+      <figure class="wide"><img src="images/marathon-course-2.jpg" alt="Au sein du peloton, le long du parcours" loading="lazy"></figure>
+      <figure class="sq"><img src="images/marathon-medaille.jpg" alt="Médaille finisher du marathon" loading="lazy"></figure>
+      <figure class="sq"><img src="images/marathon-dossard.jpg" alt="Dossard 621 du marathon" loading="lazy"></figure>
+    </div>
+    <p class="cap rev">Montpellier Run Festival · dossard 621 · médaille finisher</p>
+  </div>
+</section>
+
+<section class="region" style="padding-top:0">
+  <div class="shell" style="display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;align-items:start">
+    <div class="rev">
+      <p>J'ai bouclé le marathon de Montpellier sur les 42,195 kilomètres du parcours. C'est un projet en soi, bien avant la ligne de départ : un plan d'entraînement, une préparation quotidienne et la capacité à tenir un objectif lointain sans se décourager.</p>
+      <p>Le jour de la course, l'enjeu n'est plus la vitesse mais la gestion : doser son effort, garder un rythme régulier, rester lucide quand la fatigue arrive. Ce sont les mêmes qualités que je retrouve dans mon travail, la régularité, l'anticipation et le calme face à l'effort qui dure.</p>
+    </div>
+    <div class="rev">
+      <span class="kicker">Résultat officiel</span>
+      <div class="results">
+        <div class="row"><span class="lbl">Épreuve</span><span class="val">Marathon</span></div>
+        <div class="row"><span class="lbl">Temps</span><span class="val"><span class="acc">4 h 13 min 17</span></span></div>
+        <div class="row"><span class="lbl">Classement général</span><span class="val">423<span class="u">e</span></span></div>
+        <div class="row"><span class="lbl">Catégorie Seniors Homme</span><span class="val">169<span class="u">e sur 320</span></span></div>
+        <div class="row"><span class="lbl">Allure moyenne</span><span class="val">6 min 00<span class="u">/km</span></span></div>
+        <div class="row"><span class="lbl">Vitesse moyenne</span><span class="val">10,0<span class="u">km/h</span></span></div>
+      </div>
+      <p class="note">Une allure tenue sans faiblir sur toute la distance, l'objectif que je m'étais fixé.</p>
     </div>
   </div>
+  <div class="shell"><div class="back rev"><a href="a-cote.html" class="link-arrow">Retour</a></div></div>
 </section>
 
 <footer class="foot">
