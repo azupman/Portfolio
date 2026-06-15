@@ -1,0 +1,25 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "E-Portfolio · Alexandre Enderlin",
+      "folder_exclude_patterns": [".git"],
+      "file_exclude_patterns": [".DS_Store", "*.sublime-workspace"]
+    }
+  ],
+  "settings": {
+    "tab_size": 2,
+    "translate_tabs_to_spaces": true,
+    "trim_trailing_white_space_on_save": true,
+    "ensure_newline_at_eof_on_save": true,
+    "default_encoding": "UTF-8"
+  },
+  "build_systems": [
+    {
+      "name": "Aperçu du site (serveur local)",
+      "working_dir": "$project_path",
+      "shell_cmd": "python3 -m http.server 8000",
+      "info": "Lance un serveur local puis ouvre http://localhost:8000 dans le navigateur"
+    }
+  ]
+}

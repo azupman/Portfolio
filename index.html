@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alexandre Enderlin · Portfolio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter+Tight:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap');
+
+:root{
+  --paper:#efe9dc;        /* papier carte, ivoire chaud */
+  --paper-2:#e5ddcb;
+  --card:#f7f3ea;         /* fiche, plus clair */
+  --ink:#20322f;          /* encre vert profond */
+  --ink-soft:#4f5e58;
+  --ink-faint:#8c9088;
+  --rule:#cdc4af;
+  --route:#c2683e;        /* le tracé, terre de Sienne */
+  --route-deep:#a8542e;
+  --water:#3a6360;        /* mer/lac, vert-bleu */
+  --grid:#d7cfba;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Inter Tight',system-ui,sans-serif;
+  --mono:'Spline Sans Mono',monospace;
+  --w:1120px;--pad:clamp(20px,5vw,44px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.7;font-size:17px;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+
+/* fond carte : contours topographiques très légers */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.55;
+  background-image:
+    linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:54px 54px;
+  -webkit-mask-image:radial-gradient(ellipse at 85% -5%,rgba(0,0,0,0.13),transparent 55%);
+  mask-image:radial-gradient(ellipse at 85% -5%,rgba(0,0,0,0.13),transparent 55%);
+}
+
+.shell{max-width:var(--w);margin:0 auto;padding:0 var(--pad);position:relative;z-index:1}
+.region{padding:clamp(54px,8vw,104px) 0;position:relative;z-index:1}
+.tight{max-width:700px}
+
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.06;letter-spacing:-0.012em;color:var(--ink)}
+h1{font-size:clamp(2.5rem,6.5vw,4.7rem)}
+h2{font-size:clamp(1.7rem,4vw,2.7rem)}
+h3{font-size:1.3rem;font-weight:500}
+p{color:var(--ink-soft);margin-bottom:1.1rem}
+p.lead{font-size:1.2rem;color:var(--ink);line-height:1.55}
+em{font-style:italic;color:var(--ink)}
+
+/* étiquette d'étape, façon balise de sentier */
+.kicker{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--route);display:flex;align-items:center;gap:11px;margin-bottom:1.4rem}
+.kicker::before{content:"";width:10px;height:10px;border:2px solid var(--route);border-radius:50%;display:inline-block;flex-shrink:0}
+.step-id{font-family:var(--mono);font-size:0.76rem;color:var(--ink-faint);letter-spacing:0.14em}
+
+a{color:var(--ink);text-underline-offset:3px}
+a:hover{color:var(--route)}
+
+/* barre de navigation */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(239,233,220,0.88);backdrop-filter:blur(9px);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:var(--w);margin:0 auto;padding:0 var(--pad);height:66px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-family:var(--serif);font-size:1.14rem;font-weight:500;text-decoration:none;color:var(--ink);white-space:nowrap;display:flex;align-items:center;gap:10px}
+.brand .compass{width:17px;height:17px;flex-shrink:0}
+.menu{list-style:none;display:flex;gap:2px;align-items:center}
+.menu>li{position:relative}
+.menu a{font-family:var(--sans);font-size:0.85rem;text-decoration:none;color:var(--ink-soft);padding:9px 13px;display:block;white-space:nowrap;transition:color .18s ease}
+.menu a:hover{color:var(--ink)}
+.menu a.here{color:var(--route)}
+.sub{position:absolute;top:calc(100% + 6px);left:0;background:var(--card);border:1px solid var(--rule);min-width:256px;padding:6px;list-style:none;opacity:0;visibility:hidden;transform:translateY(6px);transition:all .2s ease;box-shadow:0 20px 44px -26px rgba(32,50,47,0.55)}
+.menu>li:hover .sub{opacity:1;visibility:visible;transform:translateY(0)}
+.sub a{font-size:0.82rem;padding:9px 11px;color:var(--ink-soft)}
+.burger{display:none;background:none;border:none;font-family:var(--mono);font-size:0.8rem;letter-spacing:0.1em;color:var(--ink);cursor:pointer;text-transform:uppercase}
+
+.link-arrow{font-family:var(--mono);font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--route);padding-bottom:3px;transition:all .2s ease;display:inline-block}
+.link-arrow:hover{color:var(--route);letter-spacing:0.16em}
+.btn{display:inline-block;font-family:var(--sans);font-size:0.9rem;text-decoration:none;color:var(--paper);background:var(--ink);padding:13px 26px;border:1px solid var(--ink);border-radius:2px;transition:all .2s ease;cursor:pointer}
+.btn:hover{background:transparent;color:var(--ink)}
+
+.rule{height:1px;background:var(--rule);border:none;margin:0}
+
+/* listes en jalons reliés par un tracé */
+.stack{list-style:none;position:relative}
+.stack li{padding:18px 0 18px 38px;border-bottom:1px solid var(--rule);position:relative}
+.stack li:first-child{border-top:1px solid var(--rule)}
+.stack li::before{content:"";position:absolute;left:8px;top:26px;width:9px;height:9px;border-radius:50%;background:var(--paper);border:2px solid var(--route)}
+.stack li::after{content:"";position:absolute;left:12px;top:35px;bottom:-2px;width:1px;background:var(--rule)}
+.stack li:last-child::after{display:none}
+.stack .tx{color:var(--ink-soft)}
+.stack .mk{display:none}
+
+/* chips / balises */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.05em;color:var(--ink-soft);border:1px solid var(--rule);padding:6px 12px;border-radius:2px;text-decoration:none;background:var(--card)}
+a.chip:hover{border-color:var(--route);color:var(--route)}
+
+/* chiffres-clés, façon repères de carte */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:30px 0}
+.kpis .k{background:var(--card);padding:24px 20px}
+.kpis .n{font-family:var(--serif);font-size:1.95rem;color:var(--water);line-height:1;margin-bottom:6px}
+.kpis .l{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink-faint)}
+
+/* lien vers une trace téléchargeable */
+.trace-link{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--water);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:7px 13px;border-radius:2px;display:inline-block;margin-top:14px;transition:all .18s ease}
+.trace-link:hover{border-color:var(--water);background:var(--water);color:var(--paper)}
+
+/* aperçu d'une trace (capture du document) */
+.trace-fig{margin:16px 0 0;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.trace-shot{display:block;border:1px solid var(--rule);border-radius:3px;background:var(--card);padding:8px;max-width:340px;box-shadow:0 22px 44px -34px rgba(32,50,47,0.55);transition:transform .25s ease,box-shadow .25s ease}
+.trace-shot img{display:block;width:100%;height:auto;border-radius:1px}
+.trace-shot:hover{transform:translateY(-3px);box-shadow:0 30px 56px -32px rgba(32,50,47,0.6)}
+.trace-cap{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);display:flex;align-items:center;gap:8px}
+.trace-cap::before{content:"";width:18px;height:1px;background:var(--route)}
+
+/* annexes : grille de captures encadrées + emplacements à compléter */
+.annexes{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin:20px 0 8px}
+.annexe{display:flex;flex-direction:column;gap:9px;margin:0}
+.annexe a,.annexe .shot{display:block;border:1px solid var(--rule);border-radius:3px;background:var(--card);padding:8px;box-shadow:0 18px 38px -30px rgba(32,50,47,0.5);transition:transform .25s ease,box-shadow .25s ease}
+.annexe a:hover{transform:translateY(-3px);box-shadow:0 26px 48px -30px rgba(32,50,47,0.6)}
+.annexe img{display:block;width:100%;height:auto;border-radius:1px}
+.annexe figcaption{font-family:var(--mono);font-size:0.64rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);display:flex;align-items:center;gap:8px}
+.annexe figcaption::before{content:"";width:14px;height:1px;background:var(--route);flex-shrink:0}
+.annexe-ph{border:1px dashed var(--route);border-radius:3px;background:rgba(194,104,62,0.05);padding:38px 18px;text-align:center;color:var(--ink-soft);font-family:var(--mono);font-size:0.72rem;letter-spacing:0.04em;line-height:1.6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:180px}
+.annexe-ph strong{color:var(--route);font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase}
+
+/* page compétence mobilisée : en-tête de bloc AC */
+.acblock{border-top:1px solid var(--rule);padding:26px 0}
+.acblock:last-of-type{border-bottom:1px solid var(--rule)}
+.ac-code{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.06em;color:var(--route);text-transform:uppercase;display:block;margin-bottom:6px}
+.softpair{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.softpair .sp{font-family:var(--mono);font-size:0.74rem;letter-spacing:0.05em;color:var(--ink);border:1px solid var(--rule);background:var(--card);padding:9px 15px;border-radius:2px}
+
+/* tableau QQOQCP */
+.qtable{width:100%;border-collapse:collapse;margin:16px 0 8px;font-size:0.95rem}
+.qtable th,.qtable td{border:1px solid var(--rule);padding:12px 14px;text-align:left;vertical-align:top}
+.qtable th{width:120px;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--route);background:var(--card);white-space:nowrap}
+.qtable td{color:var(--ink-soft)}
+
+/* lecteur musique flottant, présent sur toutes les pages */
+.miniplayer{position:fixed;right:clamp(14px,3vw,28px);bottom:clamp(14px,3vw,24px);z-index:200;display:flex;align-items:center;gap:12px;background:var(--ink);color:var(--paper);border-radius:40px;padding:9px 16px 9px 11px;box-shadow:0 16px 40px -12px rgba(32,50,47,0.55);max-width:calc(100vw - 32px)}
+.miniplayer .mp-disc{width:34px;height:34px;border-radius:50%;background:var(--route);display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:spin 6s linear infinite;animation-play-state:paused}
+.miniplayer.playing .mp-disc{animation-play-state:running}
+.miniplayer .mp-disc svg{width:16px;height:16px;fill:var(--paper)}
+.miniplayer .mp-meta{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+.miniplayer .mp-meta strong{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--route)}
+.miniplayer .mp-meta span{font-size:0.78rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+.miniplayer .mp-btn{background:var(--paper);color:var(--ink);border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .15s}
+.miniplayer .mp-btn:hover{transform:scale(1.08)}
+.miniplayer .mp-btn svg{width:15px;height:15px;fill:var(--ink)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:520px){.miniplayer .mp-meta{display:none}}
+
+.foot{border-top:1px solid var(--rule);padding:60px 0 50px;position:relative;z-index:1}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px}
+.foot h3{font-size:1.05rem;margin-bottom:14px}
+.foot p{font-size:0.92rem;color:var(--ink-soft)}
+.foot a{color:var(--ink-soft);text-decoration:none}
+.foot a:hover{color:var(--route)}
+.foot-base{margin-top:46px;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.05em;color:var(--ink-faint)}
+
+.rev{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.rev.on{opacity:1;transform:none}
+
+.facts{display:flex;flex-wrap:wrap;gap:30px;margin:0 0 50px;font-family:var(--mono);font-size:0.76rem;letter-spacing:0.04em;color:var(--ink-faint)}
+.facts span{display:flex;flex-direction:column;gap:5px}
+.facts .fval{font-weight:400;color:var(--ink);font-size:0.92rem;letter-spacing:0}
+
+@media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:860px){
+  .burger{display:block}
+  .menu{position:absolute;top:66px;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--card);border-bottom:1px solid var(--rule);padding:10px;gap:0;max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .menu.open{max-height:84vh;overflow:auto}
+  .menu a{padding:13px}
+  .sub{position:static;opacity:1;visibility:visible;transform:none;border:none;box-shadow:none;padding:0 0 8px 14px;min-width:0}
+  .foot-grid{grid-template-columns:1fr;gap:28px}
+}
+
+/* --- index --- */
+.hero{padding:clamp(60px,10vw,120px) 0 clamp(36px,6vw,70px)}
+.hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center}
+.hero h1{max-width:16ch}
+.hero .lead{max-width:50ch;margin-top:1.6rem}
+.coords{display:flex;flex-wrap:wrap;gap:28px;margin-top:2.4rem;font-family:var(--mono);font-size:0.75rem;letter-spacing:0.05em;color:var(--ink-faint)}
+.coords span{display:flex;flex-direction:column;gap:5px}
+.coords .fval{font-weight:400;color:var(--ink);font-size:0.95rem;letter-spacing:0}
+.mapcard{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:8px;box-shadow:0 30px 60px -40px rgba(32,50,47,0.5)}
+.mapcard svg{width:100%;height:auto;display:block}
+.mapcard img{width:100%;height:auto;display:block;aspect-ratio:4/5;object-fit:cover}
+.maptag{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-faint);padding:8px 6px 4px;display:flex;justify-content:space-between}
+
+/* Pitch vidéo */
+.pitch-section{padding:clamp(54px,8vw,104px) 0}
+.pitch-grid{display:grid;grid-template-columns:0.4fr 1fr;gap:40px;align-items:start}
+.pitch-grid .side{font-family:var(--mono);font-size:0.76rem;letter-spacing:0.1em;color:var(--ink-faint);text-transform:uppercase;padding-top:8px}
+.video-wrap{background:var(--card);border:1px solid var(--rule);aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;position:relative;overflow:hidden}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.video-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;width:100%;height:100%;padding:30px;text-align:center}
+.play-icon{width:56px;height:56px;border:2px solid var(--route);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.play-icon svg{width:20px;height:20px;fill:var(--route);margin-left:4px}
+.video-label{font-family:var(--mono);font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--route)}
+.video-sub{font-size:0.88rem;color:var(--ink-faint);max-width:28ch}
+
+/* Bande-son */
+.bande-son{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--rule);padding:16px 20px;margin-top:16px;border-radius:2px}
+.bs-icon{width:36px;height:36px;background:var(--water);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bs-icon svg{width:16px;height:16px;fill:var(--paper)}
+.bs-text{flex:1}
+.bs-text strong{font-family:var(--mono);font-size:0.76rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink);display:block;margin-bottom:3px}
+.bs-text span{font-size:0.86rem;color:var(--ink-faint)}
+audio{width:100%;max-width:220px;height:28px;filter:sepia(20%)}
+
+/* Présentation courte */
+.pitch-bio{display:grid;grid-template-columns:0.4fr 1fr;gap:40px;align-items:start}
+.pitch-bio .side{font-family:var(--mono);font-size:0.76rem;letter-spacing:0.1em;color:var(--ink-faint);text-transform:uppercase;padding-top:8px}
+
+/* CTA gate */
+.gate{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule)}
+.gate a{text-decoration:none;color:var(--ink);padding:46px 0;display:block;border-bottom:1px solid var(--rule);transition:padding-left .3s ease}
+.gate a:first-child{border-right:1px solid var(--rule);padding-right:40px}
+.gate a:last-child{padding-left:40px}
+.gate a:hover{padding-left:54px}
+.gate a:last-child:hover{padding-left:54px}
+.gate .step-id{display:block;margin-bottom:14px}
+.gate h3{font-size:1.7rem;margin-bottom:8px}
+.gate p{font-size:0.95rem;margin-bottom:18px}
+
+@media(max-width:860px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .pitch-grid,.pitch-bio{grid-template-columns:1fr;gap:14px}
+  .gate{grid-template-columns:1fr}
+  .gate a:first-child{border-right:none;padding-right:0}
+  .gate a:last-child{padding-left:0}
+  .gate a:hover,.gate a:last-child:hover{padding-left:16px}
+}
+
+/* --- experiences --- */
+.route{list-style:none;position:relative;margin-top:10px}
+.route::before{content:"";position:absolute;left:13px;top:14px;bottom:14px;width:1px;background:var(--rule)}
+.route li{position:relative;padding:0 0 4px 0}
+.route a{display:grid;grid-template-columns:0.55fr 1.7fr 0.5fr;gap:24px;align-items:baseline;padding:30px 0 30px 48px;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--rule);transition:padding-left .25s ease}
+.route li:last-child a{border-bottom:none}
+.route a::before{content:"";position:absolute;left:8px;top:38px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2.4px solid var(--route);transition:background .2s ease}
+.route a:hover{padding-left:58px}
+.route a:hover::before{background:var(--route)}
+.route .star::before{background:var(--water);border-color:var(--water)}
+.route .yr{font-family:var(--mono);font-size:0.76rem;letter-spacing:0.05em;color:var(--ink-faint)}
+.route h3{font-size:1.5rem}
+.route .ro{font-size:0.92rem;color:var(--ink-soft);margin-top:4px}
+.route .go{font-family:var(--mono);font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--route);text-align:right}
+.flag{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--paper);background:var(--water);padding:3px 8px;border-radius:2px;margin-left:10px;vertical-align:middle}
+@media(max-width:760px){.route a{grid-template-columns:1fr;gap:6px;padding-left:44px}.route a:hover{padding-left:50px}.route .go{text-align:left;margin-top:10px}}
+
+/* --- exp-bjcv --- */
+.body-col{max-width:720px}
+.back{margin-top:50px}
+.proof{border-top:1px solid var(--rule);padding:26px 0}
+.proof:last-of-type{border-bottom:1px solid var(--rule)}
+.proof h4{font-family:var(--serif);font-weight:500;font-size:1.2rem;margin-bottom:8px}
+.proof p{margin:0;color:var(--ink-soft);font-size:0.97rem}
+.lvl-tag{font-family:var(--mono);font-size:0.76rem;letter-spacing:0.07em;color:var(--route);text-transform:uppercase;display:inline-block;margin-bottom:24px}
+
+/* --- exp-conseil --- */
+.body-col{max-width:720px}
+.back{margin-top:50px}
+.proof{border-top:1px solid var(--rule);padding:26px 0}
+.proof:last-of-type{border-bottom:1px solid var(--rule)}
+.proof h4{font-family:var(--serif);font-weight:500;font-size:1.2rem;margin-bottom:8px}
+.proof p{margin:0;color:var(--ink-soft);font-size:0.97rem}
+.lvl-tag{font-family:var(--mono);font-size:0.76rem;letter-spacing:0.07em;color:var(--route);text-transform:uppercase;display:inline-block;margin-bottom:24px}
+.quote-block{border-left:3px solid var(--water);padding:16px 22px;background:var(--card);margin:30px 0}
+.quote-block p{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--ink);margin:0;line-height:1.6}
+
+/* --- competences --- */
+.comp-list{list-style:none;border-top:1px solid var(--rule)}
+.comp-list li{border-bottom:1px solid var(--rule)}
+.comp-list a{display:grid;grid-template-columns:0.5fr 1.4fr 0.9fr;gap:24px;align-items:baseline;padding:36px 0;text-decoration:none;color:var(--ink);transition:padding-left .25s ease}
+.comp-list a:hover{padding-left:18px}
+.comp-list .no{font-family:var(--serif);font-size:2.3rem;color:var(--ink-faint);line-height:1}
+.comp-list h3{font-size:1.75rem}
+.comp-list .desc{font-size:0.92rem;color:var(--ink-soft);margin-top:6px}
+.comp-list .lvl{font-family:var(--mono);font-size:0.74rem;letter-spacing:0.05em;color:var(--route);text-align:right}
+@media(max-width:760px){.comp-list a{grid-template-columns:0.3fr 1fr}.comp-list .lvl{grid-column:2;text-align:left;margin-top:8px}}
+
+/* --- cote-course --- */
+.gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin:10px 0}
+.gallery figure{margin:0;overflow:hidden;background:var(--paper-2);border:1px solid var(--rule)}
+.gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.gallery figure:hover img{transform:scale(1.04)}
+.gallery .tall{grid-column:span 2;grid-row:span 2;aspect-ratio:3/4}
+.gallery .wide{grid-column:span 4;aspect-ratio:3/2}
+.gallery .sq{grid-column:span 2;aspect-ratio:3/4}
+.cap{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.05em;color:var(--ink-faint);margin-top:10px}
+.results{border-top:1px solid var(--rule);margin-top:8px}
+.results .row{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--rule)}
+.results .lbl{font-family:var(--mono);font-size:0.76rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink-faint)}
+.results .val{font-family:var(--serif);font-size:1.35rem;color:var(--ink)}
+.results .val .u{font-family:var(--mono);font-size:0.76rem;color:var(--ink-faint);letter-spacing:0.04em;margin-left:4px}
+.results .val .acc{color:var(--route)}
+.split{display:grid;grid-template-columns:0.95fr 1.05fr;gap:56px;align-items:start}
+@media(max-width:760px){
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .gallery .tall,.gallery .wide,.gallery .sq{grid-column:span 2;grid-row:auto;aspect-ratio:3/2}
+  .split{grid-template-columns:1fr;gap:36px}
+}
+
+/* --- cote-voyages --- */
+.body-col{max-width:720px}
+.back{margin-top:50px}
+.dest-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:10px 0}
+.dest{background:var(--card);padding:28px 24px}
+.dest .flag{font-size:1.8rem;margin-bottom:10px;line-height:1}
+.dest h4{font-family:var(--serif);font-weight:500;font-size:1.2rem;margin-bottom:4px}
+.dest .dtag{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--route);margin-bottom:10px}
+.dest p{font-size:0.9rem;color:var(--ink-soft);margin:0}
+.dest .lesson{font-family:var(--mono);font-size:0.74rem;letter-spacing:0.03em;color:var(--water);border-top:1px solid var(--rule);margin-top:14px;padding-top:12px}
+.learnbox{background:var(--card);border:1px solid var(--rule);padding:26px 28px;margin-top:30px}
+.learnbox h3{font-family:var(--serif);font-weight:500;font-size:1.1rem;margin-bottom:12px}
+.learnbox ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.learnbox li{font-size:0.92rem;color:var(--ink-soft);padding-left:18px;position:relative}
+.learnbox li::before{content:"→";position:absolute;left:0;color:var(--route)}
+@media(max-width:660px){.dest-grid{grid-template-columns:1fr}}
+
+/* --- cote-engagement --- */
+.body-col{max-width:720px}
+.back{margin-top:50px}
+.asso-card{border:1px solid var(--rule);background:var(--card);padding:32px 30px;margin-bottom:24px}
+.asso-card:last-of-type{margin-bottom:0}
+.asso-header{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;margin-bottom:20px}
+.asso-icon{width:52px;height:52px;border-radius:2px;background:var(--water);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.asso-icon svg{width:26px;height:26px;stroke:var(--paper);fill:none;stroke-width:1.8}
+.asso-header-text h3{font-family:var(--serif);font-weight:500;font-size:1.4rem;margin-bottom:4px}
+.asso-meta{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--route)}
+.asso-body p{font-size:0.95rem;color:var(--ink-soft);margin-bottom:0.9rem}
+.asso-body p:last-child{margin-bottom:0}
+.asso-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:20px}
+.asso-kpis .k{background:var(--paper);padding:16px 14px}
+.asso-kpis .n{font-family:var(--serif);font-size:1.5rem;color:var(--water);line-height:1;margin-bottom:4px}
+.asso-kpis .l{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink-faint)}
+.skills-learned{border-top:1px solid var(--rule);margin-top:20px;padding-top:18px}
+.skills-learned h4{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
+.skills-learned .chips{margin:0}
+@media(max-width:580px){.asso-kpis{grid-template-columns:1fr 1fr}}
+
+/* --- qui-suis-je --- */
+.profile-header{display:grid;grid-template-columns:260px 1fr;gap:60px;align-items:start;padding:clamp(40px,7vw,90px) 0}
+.portrait-wrap{position:sticky;top:90px}
+.portrait{aspect-ratio:3/4;background:var(--paper-2);border:1px solid var(--rule);overflow:hidden;margin-bottom:16px}
+.portrait img{width:100%;height:100%;object-fit:cover}
+.contact-stack{display:flex;flex-direction:column;gap:8px}
+.cc{font-family:var(--mono);font-size:0.73rem;letter-spacing:0.04em;color:var(--ink-soft);border:1px solid var(--rule);padding:9px 13px;border-radius:2px;background:var(--card);text-decoration:none;display:block;transition:all .18s ease}
+a.cc:hover{border-color:var(--route);color:var(--route)}
+.cc-dl{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:500;text-align:center;margin-top:4px}
+a.cc-dl:hover{background:var(--route);border-color:var(--route);color:var(--paper)}
+.profile-name{font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,5.5vw,4rem);line-height:1.04;letter-spacing:-0.012em;color:var(--ink);margin-bottom:10px}
+.profile-meta{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.09em;text-transform:uppercase;color:var(--route);margin-bottom:2rem;display:flex;flex-wrap:wrap;gap:8px 20px}
+.profile-meta span{display:flex;align-items:center;gap:7px}
+.profile-meta span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--route);flex-shrink:0}
+.traits{display:flex;flex-wrap:wrap;gap:8px;margin:1.4rem 0 1.8rem}
+.trait{font-family:var(--mono);font-size:0.71rem;letter-spacing:0.05em;padding:6px 13px;border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink-soft)}
+.goal-box{border-left:3px solid var(--route);padding:16px 20px;background:var(--card);margin-top:1.4rem}
+.goal-box h3{font-family:var(--serif);font-size:1.05rem;font-weight:500;margin-bottom:7px}
+.goal-box p{margin:0;font-size:0.93rem;color:var(--ink-soft)}
+
+/* Timeline enrichie */
+.xtl{list-style:none;position:relative;margin-top:10px}
+.xtl::before{content:"";position:absolute;left:10px;top:8px;bottom:8px;width:1px;background:var(--rule)}
+.xtl li{display:grid;grid-template-columns:120px 1fr;gap:18px;padding:22px 0 22px 34px;border-bottom:1px solid var(--rule);position:relative}
+.xtl li:first-child{border-top:1px solid var(--rule)}
+.xtl li::before{content:"";position:absolute;left:5px;top:30px;width:11px;height:11px;border-radius:50%;background:var(--paper);border:2.4px solid var(--route)}
+.xtl .xdate{font-family:var(--mono);font-size:0.73rem;letter-spacing:0.04em;color:var(--ink-faint);padding-top:3px;line-height:1.4}
+.xtl h4{font-family:var(--serif);font-weight:500;font-size:1.08rem;margin-bottom:3px}
+.xtl .xorg{font-family:var(--mono);font-size:0.71rem;letter-spacing:0.04em;color:var(--route);margin-bottom:7px}
+.xtl p{font-size:0.89rem;margin:0;color:var(--ink-soft)}
+.xtag{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--paper);background:var(--water);padding:2px 7px;border-radius:2px;display:inline-block;margin-top:6px}
+
+/* Grille compétences */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.sk{background:var(--card);padding:20px 18px}
+.sk h4{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--route);margin-bottom:9px}
+.sk p{font-size:0.88rem;margin:0;color:var(--ink-soft)}
+
+/* Section contact foncée */
+.contact-section{background:var(--ink);padding:clamp(50px,8vw,90px) 0}
+.contact-section .kicker{color:var(--ink-faint)}
+.contact-section .kicker::before{border-color:var(--ink-faint)}
+.contact-section h2{color:var(--paper);max-width:24ch;margin-bottom:10px}
+.contact-section>div>p{color:var(--ink-faint);max-width:50ch}
+.contact-items{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:40px}
+.ci{display:flex;flex-direction:column;gap:5px}
+.ci .lbl{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint)}
+.ci a,.ci span{color:var(--paper);text-decoration:none;font-size:0.97rem}
+.ci a:hover{color:var(--route)}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+@media(max-width:900px){.profile-header{grid-template-columns:1fr;gap:28px}.portrait-wrap{position:static}.portrait{max-width:200px}.two{grid-template-columns:1fr;gap:40px}.contact-items{grid-template-columns:1fr;gap:24px}.skills-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.xtl li{grid-template-columns:1fr;gap:4px;padding-left:30px}.skills-grid{grid-template-columns:1fr}}
+
+/* ---- routeur page unique ---- */
+.page{display:none}
+.page.active{display:block}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="topbar-in">
+    <a href="#index" class="brand"><svg class="compass" viewBox="0 0 24 24" fill="none" stroke="#c2683e" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><polygon points="12,6.5 14.2,12 12,17.5 9.8,12" fill="#c2683e" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="#20322f" stroke="none"/></svg>Alexandre Enderlin</a>
+    <button class="burger" onclick="toggleMenu()">Menu</button>
+    <ul class="menu">
+      <li><a href="#index">Départ</a></li>
+      <li><a href="#experiences">Itinéraire</a>
+        <ul class="sub">
+          <li><a href="#exp-bjcv">Reprise d'entreprise · BJCV</a></li>
+          <li><a href="#exp-getfitbox">Transformation numérique · GetFitBox</a></li>
+          <li><a href="#exp-dossier-doc">Dossier documentaire</a></li>
+          <li><a href="#exp-rexel">Rexel France</a></li>
+          <li><a href="#exp-nexans">Nexans France</a></li>
+          <li><a href="#exp-conseil">Conseil des étudiants</a></li>
+        </ul>
+      </li>
+      <li><a href="#competences">Compétences</a>
+        <ul class="sub">
+          <li><a href="#comp-analyser">Analyser</a></li>
+          <li><a href="#comp-decider">Décider</a></li>
+          <li><a href="#comp-piloter">Piloter</a></li>
+          <li><a href="#comp-produire">Produire</a></li>
+          <li><a href="#comp-evaluer">Évaluer</a></li>
+        </ul>
+      </li>
+      <li><a href="#a-cote">Échappées</a>
+        <ul class="sub">
+          <li><a href="#cote-course">Course &amp; marathon</a></li>
+          <li><a href="#cote-voyages">Carnet de voyage</a></li>
+          <li><a href="#cote-engagement">Engagement associatif</a></li>
+        </ul>
+      </li>
+      <li><a href="#qui-suis-je">Profil</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+<section class="page" id="index" data-nav="index">
+<!-- Hero -->
+<header class="hero">
+  <div class="shell hero-grid">
+    <div>
+      <span class="kicker rev">Portfolio · Gestion comptable, fiscale et financière</span>
+      <h1 class="rev">Suivre les chiffres comme on lit une carte.</h1>
+      <p class="lead rev">Un bon parcours financier commence par savoir où l'on est et où l'on va. J'aime ce travail d'orientation : transformer une donnée comptable en cap clair, un reporting en décision, une marge en marge de manœuvre.</p>
+      <div class="coords rev">
+        <span>Point de départ<span class="fval">BUT GEA, parcours GC2F</span></span>
+        <span>Position actuelle<span class="fval">Alternance chez Rexel</span></span>
+        <span>Cap<span class="fval">PGE · Kedge Business School</span></span>
+      </div>
+    </div>
+    <div class="mapcard rev">
+      <img src="photo-profil.jpg" alt="Alexandre Enderlin">
+      <div class="maptag"><span>Alexandre Enderlin</span><span>Paris · 2026</span></div>
+    </div>
+  </div>
+</header>
+
+<hr class="rule">
+
+<!-- Pitch de présentation -->
+<section class="pitch-section">
+  <div class="shell">
+    <div class="pitch-grid">
+      <div class="side rev">Pitch</div>
+      <div>
+        <span class="kicker rev">Présentation en moins de 2 minutes</span>
+        <h2 class="rev" style="max-width:22ch;margin-bottom:24px">Qui suis-je, et où est-ce que je vais ?</h2>
+        <div class="video-wrap rev">
+          <!-- Remplacez l'attribut src par votre lien YouTube : https://www.youtube.com/embed/VOTRE_ID -->
+          <div class="video-placeholder">
+            <div class="play-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <span class="video-label">Pitch à venir</span>
+            <span class="video-sub">Ma vidéo de présentation personnelle sera publiée ici.</span>
+          </div>
+        </div>
+        <!-- Bande-son -->
+        <div class="bande-son rev">
+          <div class="bs-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+          </div>
+          <div class="bs-text">
+            <strong>Bande-son</strong>
+            <span>David Guetta feat. Kid Cudi — Memories</span>
+          </div>
+          <audio controls preload="none">
+            <source src="bande-son.mp3" type="audio/mpeg">
+            Votre navigateur ne supporte pas la lecture audio.
+          </audio>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- Présentation courte -->
+<section class="region">
+  <div class="shell pitch-bio">
+    <div class="side rev">Carnet de bord</div>
+    <div>
+      <p class="lead rev">Je m'appelle Alexandre Enderlin, j'ai 22 ans. Après trois ans en credit management et comptabilité fournisseur chez Nexans, je pilote aujourd'hui le reporting d'une filiale chez Rexel, et je rejoins à la rentrée le Programme Grande École de Kedge Business School.</p>
+      <p class="rev">Trois mots tiennent lieu de boussole : rigueur, méthode, curiosité. J'aime remettre de l'ordre dans une information dispersée, comprendre une organisation avant d'agir, et construire des outils que d'autres pourront vraiment utiliser. Ce site retrace les étapes de ce parcours, à travers mes expériences et les cinq compétences de ma formation.</p>
+      <div style="margin-top:1.8rem" class="rev">
+        <a href="#qui-suis-je" class="link-arrow">Découvrir mon profil complet</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- CTA double entrée -->
+<section style="padding-top:clamp(40px,6vw,70px)">
+  <div class="shell">
+    <span class="kicker rev">Deux façons de voyager</span>
+    <h2 class="rev" style="margin-bottom:40px;max-width:20ch">Parcourez l'itinéraire étape par étape, ou suivez une compétence.</h2>
+  </div>
+  <div class="shell">
+    <div class="gate">
+      <a href="#experiences" class="rev">
+        <span class="step-id">01 · Itinéraire</span>
+        <h3>Par étape</h3>
+        <p>Les missions en entreprise et le projet de reprise mené en formation, racontés un à un.</p>
+        <span class="link-arrow">Suivre l'itinéraire</span>
+      </a>
+      <a href="#competences" class="rev">
+        <span class="step-id">02 · Compétences</span>
+        <h3>Par compétence</h3>
+        <p>Les cinq compétences du référentiel GC2F, le niveau atteint et leurs preuves.</p>
+        <span class="link-arrow">Suivre une compétence</span>
+      </a>
+    </div>
+  </div>
+</section>
+</section>
+
+<section class="page" id="experiences" data-nav="experiences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Itinéraire</div>
+    <span class="kicker rev">Le parcours, jalon par jalon</span>
+    <h1 class="rev" style="max-width:900px">Quatre escales<br>qui ont dessiné ma route.</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Chaque étape a façonné une façon de travailler, du quotidien en entreprise au projet de reprise mené en équipe. Suivez le tracé.</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(40px,6vw,70px)">
+  <div class="shell">
+    <ul class="route">
+      <li class="rev"><a class="star" href="#exp-bjcv"><span class="yr">Formation · SAE</span><div><h3>Reprise d'entreprise, BJCV Mobilité Verte<span class="flag">Projet phare</span></h3><div class="ro">Évaluation, financement et reprise d'une entreprise de vélos électriques</div></div><span class="go">Lire</span></a></li>
+      <li class="rev"><a href="#exp-getfitbox"><span class="yr">Formation · SAE</span><div><h3>Transformation numérique, GetFitBox</h3><div class="ro">Conception et lancement d'un site e-commerce de box repas pour sportifs</div></div><span class="go">Lire</span></a></li>
+      <li class="rev"><a href="#exp-dossier-doc"><span class="yr">Formation · BUT3</span><div><h3>Dossier documentaire</h3><div class="ro">Diagnostic et amélioration des processus, appliqués à ma mission</div></div><span class="go">Lire</span></a></li>
+      <li class="rev"><a href="#exp-rexel"><span class="yr">2025 à 2026</span><div><h3>Rexel France</h3><div class="ro">Apprenti chef de projet finance</div></div><span class="go">Lire</span></a></li>
+      <li class="rev"><a href="#exp-nexans"><span class="yr">2022 à 2025</span><div><h3>Nexans France</h3><div class="ro">Analyste credit management et comptabilité fournisseur</div></div><span class="go">Lire</span></a></li>
+      <li class="rev"><a href="#exp-conseil"><span class="yr">2023 à 2025</span><div><h3>Conseil des étudiants</h3><div class="ro">Représentant administratif, IUT Rives de Seine</div></div><span class="go">Lire</span></a></li>
+    </ul>
+  </div>
+</section>
+</section>
+
+<section class="page" id="exp-bjcv" data-nav="experiences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Itinéraire / BJCV Mobilité Verte</div>
+    <span class="kicker rev">Projet phare · SAE Mettre en œuvre</span>
+    <h1 class="rev" style="max-width:900px">BJCV Mobilité Verte,<br>la reprise d'une entreprise de A à Z.</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">En équipe de quatre étudiants, nous avons monté le dossier complet de reprise d'un magasin de vélos électriques au Chesnay-Rocquencourt : étude de marché, valorisation, plan de financement et trajectoire de redressement sur quatre ans.</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <div class="facts rev">
+      <span>Cadre<span class="fval">BUT GC2F, 3e année</span></span>
+      <span>Équipe<span class="fval">Quatre étudiants</span></span>
+      <span>Cible<span class="fval">Magasin de vélos électriques</span></span>
+      <span>Rôle<span class="fval">Montage financier et analyse</span></span>
+    </div>
+    <div class="body-col">
+      <p class="lead rev">Le point de départ : une entreprise rentable mais mal gérée, immobilisant plus de 800 000 euros de trésorerie dans un stock dormant. Le défi : la racheter à un prix juste, convaincre une banque, et tracer un chemin de retour à l'équilibre.</p>
+    </div>
+    <div class="kpis rev">
+      <div class="k"><div class="n">680 k€</div><div class="l">Prix de reprise négocié</div></div>
+      <div class="k"><div class="n">1,02 M€</div><div class="l">Coût total du projet</div></div>
+      <div class="k"><div class="n">716 k€</div><div class="l">Valorisation par DCF</div></div>
+      <div class="k"><div class="n">45 j</div><div class="l">Rotation de stock visée</div></div>
+    </div>
+    <div class="body-col">
+      <span class="kicker rev" style="margin-top:36px">Ce que nous avons construit</span>
+      <ul class="stack rev">
+        <li><span class="tx">Une étude de marché complète : un secteur du cycle de 3,2 milliards d'euros, une zone de chalandise aisée près de Versailles, et un positionnement premium choisi face à des concurrents comme Decathlon ou Cyclable.</span></li>
+        <li><span class="tx">Une valorisation de l'entreprise par la méthode des flux de trésorerie actualisés, aboutissant à 716 000 euros, sur la base d'un coût moyen pondéré du capital de 10 pour cent.</span></li>
+        <li><span class="tx">Une décision d'achat à 680 000 euros plutôt qu'à la valeur théorique, pour ne pas payer au vendeur la plus-value que la relance allait créer, et garder une marge de sécurité.</span></li>
+        <li><span class="tx">Un plan de financement équilibré entre apport, prêt bancaire sur sept ans et crédit-vendeur, calibré pour que l'annuité reste sous le seuil prudentiel de 70 pour cent de l'excédent brut d'exploitation.</span></li>
+        <li><span class="tx">Un compte de résultat et des ratios projetés sur quatre exercices, et une trésorerie prévisionnelle mensuelle bouclant l'année sur un solde positif.</span></li>
+      </ul>
+      <span class="kicker rev" style="margin-top:44px">Le redressement visé</span>
+      <p class="rev">Le cœur du raisonnement tenait dans une idée simple : libérer le cash piégé dans les stocks. En ramenant la rotation de stock de 181 jours à 45 jours, le besoin en fonds de roulement passe de plus de 800 000 euros à environ 60 000 euros, ce qui finance à lui seul la relance et le service de la dette. En parallèle, le taux de marge brute passe de 4,4 à près de 7,9 pour cent, et la capacité d'autofinancement couvre plus de 120 pour cent des échéances de prêt dès la première année.</p>
+      <span class="kicker rev" style="margin-top:36px">Ce que ce projet m'a appris</span>
+      <p class="rev">C'est l'exercice le plus complet de ma formation. Il relie tout : lire une organisation, bâtir une prévision, défendre un prix face à un risque, et présenter un montage à un partenaire bancaire. Il sert de preuve à quatre des cinq compétences de mon parcours.</p>
+      <span class="kicker rev" style="margin-top:36px">Compétences mobilisées</span>
+      <div class="chips rev">
+        <a href="#comp-analyser" class="chip">Analyser</a>
+        <a href="#comp-decider" class="chip">Décider</a>
+        <a href="#comp-evaluer" class="chip">Évaluer</a>
+        <a href="#comp-piloter" class="chip">Piloter</a>
+      </div>
+      <div class="proof rev" style="margin-top:24px"><h4>Compétences mobilisées et validées</h4><p>Ce projet valide en particulier ma capacité à <strong>construire un argument structuré à l'aide de données chiffrées</strong> — compétence Produire, niveau 2. Le détail du contexte, des actions et des preuves est présenté sur une page dédiée.</p><a class="trace-link" href="#comp-bjcv-mob">Voir les compétences mobilisées et validées →</a></div>
+      <div class="back rev"><a href="#experiences" class="link-arrow">Retour à l'itinéraire</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+<section class="page" id="exp-rexel" data-nav="experiences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Itinéraire / Rexel France</div>
+    <span class="kicker rev">Escale</span>
+    <h1 class="rev" style="max-width:900px">Rexel France</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Au sein d'un distributeur international de matériel électrique, je participe au pilotage financier d'une filiale, avec une mission claire : rendre la performance lisible et actionnable.</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <div class="facts rev"><span>Période<span class="fval">2025 à 2026</span></span><span>Poste<span class="fval">Chef de projet finance (apprentissage)</span></span><span>Secteur<span class="fval">Distribution électrique</span></span><span>Périmètre<span class="fval">Filiale Mavisun</span></span></div>
+    <div class="body-col">
+      <span class="kicker rev">Missions</span>
+      <ul class="stack rev"><li><span class="tx">Élaborer les reportings de compte de résultat de la filiale pour donner à la direction une vision financière nette.</span></li><li><span class="tx">Suivre les indicateurs de marge et de stocks de la filiale Mavisun, et contribuer à l'optimisation des performances.</span></li><li><span class="tx">Gérer des projets financiers transverses en tenant les délais et les objectifs fixés.</span></li></ul>
+      <span class="kicker rev" style="margin-top:46px">Compétences mobilisées</span>
+      <div class="chips rev"><a href="#comp-evaluer" class="chip">Évaluer</a><a href="#comp-decider" class="chip">Décider</a><a href="#comp-piloter" class="chip">Piloter</a></div>
+      <div class="back rev"><a href="#experiences" class="link-arrow">Retour à l'itinéraire</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+<section class="page" id="exp-nexans" data-nav="experiences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Itinéraire / Nexans France</div>
+    <span class="kicker rev">Escale</span>
+    <h1 class="rev" style="max-width:900px">Nexans France</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Trois années chez un leader mondial du câble m'ont permis de couvrir toute la chaîne du credit management et de la comptabilité, du suivi des impayés jusqu'à la clôture.</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <div class="facts rev"><span>Période<span class="fval">2022 à 2025</span></span><span>Poste<span class="fval">Analyste credit management et comptabilité fournisseur (apprentissage)</span></span><span>Secteur<span class="fval">Industrie du câble</span></span><span>Durée<span class="fval">Trois ans</span></span></div>
+    <div class="body-col">
+      <span class="kicker rev">Missions</span>
+      <ul class="stack rev"><li><span class="tx">Gérer un portefeuille de clients en optimisant le suivi des impayés et le reporting des encaissements.</span></li><li><span class="tx">Prendre en charge les dossiers de clôture comptable, dont la revalorisation et le traitement des créances douteuses.</span></li><li><span class="tx">Produire le reporting mensuel des indicateurs comptables (comptes débiteurs, avances, factures non parvenues) sous Power BI.</span></li><li><span class="tx">Contribuer au déploiement de la facturation électronique pour fluidifier les processus comptables.</span></li><li><span class="tx">Suivre les contrats de location de matériels industriels et veiller à leur conformité.</span></li></ul>
+      <span class="kicker rev" style="margin-top:46px">Compétences mobilisées</span>
+      <div class="chips rev"><a href="#comp-produire" class="chip">Produire</a><a href="#comp-analyser" class="chip">Analyser</a><a href="#comp-decider" class="chip">Décider</a><a href="#comp-piloter" class="chip">Piloter</a></div>
+      <div class="back rev"><a href="#experiences" class="link-arrow">Retour à l'itinéraire</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+<section class="page" id="exp-conseil" data-nav="experiences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Itinéraire / Conseil des étudiants</div>
+    <span class="kicker rev">Mandat électif · Représentation</span>
+    <h1 class="rev" style="max-width:900px">Conseil des étudiants,<br>IUT Rives de Seine.</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Élu pour deux ans pour représenter mes camarades dans les instances administratives de l'IUT, j'ai appris le dialogue institutionnel, la gestion de parties prenantes aux intérêts variés, et la conduite de projets collectifs.</p>
+  </div>
+</header>
+
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <div class="facts rev">
+      <span>Période<span class="fval">2023 à 2025</span></span>
+      <span>Poste<span class="fval">Représentant administratif</span></span>
+      <span>Établissement<span class="fval">IUT Rives de Seine</span></span>
+      <span>Mandat<span class="fval">Deux ans</span></span>
+    </div>
+
+    <div class="body-col">
+
+      <p class="lead rev">Être représentant étudiant dans les instances d'un établissement universitaire, c'est tenir un rôle d'interface entre deux mondes : celui des étudiants, avec leurs attentes et leurs contraintes, et celui de l'administration, avec ses procédures et ses arbitrages.</p>
+
+      <div class="quote-block rev">
+        <p>«&nbsp;Un représentant étudiant n'est pas seulement une voix. Il est un traducteur entre des réalités qui ne parlent pas toujours la même langue.&nbsp;»</p>
+      </div>
+
+      <span class="kicker rev" style="margin-top:44px">Missions exercées</span>
+      <ul class="stack rev">
+        <li><span class="tx">Siéger dans les instances administratives de l'IUT (conseil de département, commission pédagogique) et y porter les intérêts des étudiants avec rigueur et discernement.</span></li>
+        <li><span class="tx">Recueillir les retours des étudiants, les synthétiser et les formuler de façon constructive pour qu'ils soient entendus et pris en compte par la direction.</span></li>
+        <li><span class="tx">Organiser et animer les assemblées générales étudiantes : convocation, ordre du jour, compte rendu et communication inter-filières.</span></li>
+        <li><span class="tx">Faciliter la communication entre les différentes filières du département pour créer une dynamique de promotion solidaire.</span></li>
+        <li><span class="tx">Contribuer à l'amélioration des conditions d'études en faisant remonter les besoins concrets des étudiants en matière de ressources pédagogiques et d'organisation.</span></li>
+      </ul>
+
+      <span class="kicker rev" style="margin-top:44px">Ce que ce mandat m'a appris</span>
+
+      <div class="proof rev">
+        <h4>La médiation entre des intérêts divergents</h4>
+        <p>Défendre les étudiants sans s'opposer systématiquement à l'administration, c'est un exercice d'équilibre que l'on retrouve dans tout poste de pilotage financier : comprendre les contraintes de chaque partie pour trouver des solutions acceptables par tous.</p>
+      </div>
+
+      <div class="proof rev">
+        <h4>La conduite de réunions et la communication formelle</h4>
+        <p>Préparer un ordre du jour, animer un débat et rédiger un compte rendu utilisable sont des compétences directement transférables au monde professionnel. Ce mandat m'a obligé à structurer ma pensée et à communiquer avec clarté devant des interlocuteurs adultes.</p>
+      </div>
+
+      <div class="proof rev">
+        <h4>La responsabilité collective et la durée</h4>
+        <p>Un mandat de deux ans, c'est suffisamment long pour voir les effets de ses actions et pour comprendre que le changement institutionnel est lent. Cette patience et cette vision sur le temps long me servent aujourd'hui dans mes projets financiers chez Rexel.</p>
+      </div>
+
+      <span class="kicker rev" style="margin-top:30px">Compétences mobilisées</span>
+      <div class="chips rev">
+        <a href="#comp-piloter" class="chip">Piloter</a>
+        <a href="#comp-analyser" class="chip">Analyser</a>
+      </div>
+
+      <div class="back rev"><a href="#experiences" class="link-arrow">Retour à l'itinéraire</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+<section class="page" id="competences" data-nav="competences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Compétences</div>
+    <span class="kicker rev">Cinq caps à tenir</span>
+    <h1 class="rev" style="max-width:900px">Les cinq compétences<br>du référentiel GC2F.</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Pour chacune, le niveau visé dans la formation et les preuves tirées de mes expériences. On accède aux mêmes preuves par étape depuis l'itinéraire.</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(40px,6vw,70px)">
+  <div class="shell"><ul class="comp-list"><li class="rev"><a href="#comp-analyser"><span class="no">1</span><div><h3>Analyser</h3><div class="desc">Analyser les processus de l'organisation dans son environnement</div></div><span class="lvl">Niveau 2</span></a></li><li class="rev"><a href="#comp-decider"><span class="no">2</span><div><h3>Décider</h3><div class="desc">Aider à la prise de décision</div></div><span class="lvl">Niveau 3</span></a></li><li class="rev"><a href="#comp-piloter"><span class="no">3</span><div><h3>Piloter</h3><div class="desc">Piloter les relations avec les parties prenantes</div></div><span class="lvl">Niveau 3</span></a></li><li class="rev"><a href="#comp-produire"><span class="no">4</span><div><h3>Produire</h3><div class="desc">Produire l'information comptable, fiscale et sociale</div></div><span class="lvl">Niveau 2</span></a></li><li class="rev"><a href="#comp-evaluer"><span class="no">5</span><div><h3>Évaluer</h3><div class="desc">Évaluer l'activité de l'organisation</div></div><span class="lvl">Niveau 2</span></a></li></ul></div>
+</section>
+</section>
+
+<section class="page" id="comp-analyser" data-nav="competences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Compétences / Analyser</div>
+    <span class="kicker rev">Compétence GC2F</span>
+    <h1 class="rev" style="max-width:900px">Analyser</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Analyser les processus de l'organisation dans son environnement</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <span class="lvl-tag rev">Niveau 2 · Évaluer les processus de l'organisation</span>
+    <div class="body-col">
+      <p class="lead rev">Comprendre une organisation, ses enjeux et ses processus, c'est le premier relevé avant de tracer une route. En formation comme chez Nexans, j'ai appris à lire une organisation avant de l'analyser.</p>
+      <span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
+      <ul class="stack rev"><li><span class="tx">Dans des organisations de tailles et d'espaces géographiques différents</span></li><li><span class="tx">Dans des organisations marchandes ou non marchandes</span></li></ul>
+      <span class="kicker rev" style="margin-top:44px">Apprentissages critiques visés</span>
+      <ul class="stack rev"><li><span class="tx">Analyser les différents types d'enjeux</span></li><li><span class="tx">Analyser les dimensions identitaires de l'organisation</span></li><li><span class="tx">Évaluer le niveau de performance des processus</span></li></ul>
+      <span class="kicker rev" style="margin-top:44px">Preuves</span>
+      <div class="proof rev"><h4>L'étude de marché du projet BJCV</h4><p>Pour la reprise de BJCV, j'ai contribué à l'analyse d'un secteur du cycle de 3,2 milliards d'euros, de sa zone de chalandise et de sa concurrence, afin de situer l'entreprise et de justifier un positionnement premium.</p></div><div class="proof rev"><h4>Le diagnostic du processus de stock</h4><p>Le cœur du diagnostic BJCV a été d'identifier un processus défaillant : un stock tournant en 181 jours qui immobilisait plus de 800 000 euros, et d'en mesurer l'effet sur la performance.</p></div><div class="proof rev"><h4>Le processus de recouvrement chez Nexans</h4><p>En gérant un portefeuille clients, j'ai cartographié le processus de relance et repéré les points de blocage à l'origine des impayés.</p><div class="trace-fig"><a class="trace-shot" href="trace-fiche-de-poste-nexans.pdf" target="_blank" rel="noopener"><img src="trace-nexans.jpg" alt="Fiche de poste Credit Management — Nexans France" loading="lazy"></a><span class="trace-cap">Capture · Fiche de poste Nexans</span><a class="trace-link" href="trace-fiche-de-poste-nexans.pdf" target="_blank" rel="noopener">Ouvrir le document (PDF)</a></div></div><div class="proof rev"><h4>Le diagnostic stratégique de Doctolib</h4><p>En SAE de troisième année, j'ai analysé la situation de Doctolib face à l'arrivée de l'IA en santé : diagnostic SWOT, environnement réglementaire (RGPD, AI Act) et positionnement face aux acteurs américains, pour répondre à une question de fond : cette croissance est-elle soutenable ?</p><div class="trace-fig"><a class="trace-shot" href="trace-sae6-doctolib.pdf" target="_blank" rel="noopener"><img src="trace-doctolib.jpg" alt="Support de l'étude stratégique Doctolib — SAE 3e année" loading="lazy"></a><span class="trace-cap">Capture · Étude Doctolib</span><a class="trace-link" href="trace-sae6-doctolib.pdf" target="_blank" rel="noopener">Ouvrir le support (PDF)</a></div></div>
+      <span class="kicker rev" style="margin-top:30px">Étapes liées</span>
+      <div class="chips rev"><a href="#exp-bjcv" class="chip">BJCV</a><a href="#exp-nexans" class="chip">Nexans</a></div>
+      <div class="back rev"><a href="#competences" class="link-arrow">Toutes les compétences</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+<section class="page" id="comp-decider" data-nav="competences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Compétences / Décider</div>
+    <span class="kicker rev">Compétence GC2F</span>
+    <h1 class="rev" style="max-width:900px">Décider</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Aider à la prise de décision</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <span class="lvl-tag rev">Niveau 3 · Concourir à la prise de décision</span>
+    <div class="body-col">
+      <p class="lead rev">Une bonne décision repose sur une information fiable et bien présentée. Mon rôle est souvent de produire les analyses et les tableaux de bord qui éclairent un choix.</p>
+      <span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
+      <ul class="stack rev"><li><span class="tx">Dans des organisations de tailles et d'espaces géographiques différents</span></li><li><span class="tx">Dans des organisations marchandes ou non marchandes</span></li></ul>
+      <span class="kicker rev" style="margin-top:44px">Apprentissages critiques visés</span>
+      <ul class="stack rev"><li><span class="tx">Exploiter les données pour accompagner la prise de décision</span></li><li><span class="tx">Exploiter un ERP et ses fonctionnalités</span></li><li><span class="tx">Analyser les contraintes et les risques, et leur impact sur la performance</span></li></ul>
+      <span class="kicker rev" style="margin-top:44px">Preuves</span>
+      <div class="proof rev"><h4>La décision de prix sur BJCV</h4><p>Face à une valorisation théorique de 716 000 euros, nous avons décidé d'une offre ferme à 680 000 euros. C'est une vraie décision sous risque : ne pas payer la plus-value future et se garder une marge de sécurité face aux aléas de la reprise.</p></div><div class="proof rev"><h4>Tableaux de bord sous Power BI</h4><p>Chez Nexans, j'ai construit et maintenu le reporting mensuel des indicateurs comptables, un outil utilisé directement par les responsables pour arbitrer.</p></div><div class="proof rev"><h4>Maîtrise des systèmes d'information</h4><p>J'ai travaillé sur plusieurs outils (SAP, Basware, Get Paid, Glovia), ce qui me permet d'extraire et de fiabiliser les données utiles à la décision.</p></div><div class="proof rev"><h4>Le choix des financements de Doctolib</h4><p>Dans l'étude de cas menée en SAE, j'ai recommandé un financement adapté à chaque axe de croissance : augmentation de capital pour la croissance externe risquée, venture debt et aides publiques pour la R&amp;D, dette bancaire classique pour l'exploitation. Le risque au capital, le prévisible à la dette.</p><div class="trace-fig"><a class="trace-shot" href="trace-sae6-doctolib.pdf" target="_blank" rel="noopener"><img src="trace-doctolib.jpg" alt="Support de l'étude stratégique Doctolib — SAE 3e année" loading="lazy"></a><span class="trace-cap">Capture · Étude Doctolib</span><a class="trace-link" href="trace-sae6-doctolib.pdf" target="_blank" rel="noopener">Ouvrir le support (PDF)</a></div></div>
+      <span class="kicker rev" style="margin-top:30px">Étapes liées</span>
+      <div class="chips rev"><a href="#exp-bjcv" class="chip">BJCV</a><a href="#exp-nexans" class="chip">Nexans</a><a href="#exp-rexel" class="chip">Rexel</a></div>
+      <div class="back rev"><a href="#competences" class="link-arrow">Toutes les compétences</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+<section class="page" id="comp-piloter" data-nav="competences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Compétences / Piloter</div>
+    <span class="kicker rev">Compétence GC2F</span>
+    <h1 class="rev" style="max-width:900px">Piloter</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Piloter les relations avec les parties prenantes de l'organisation</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <span class="lvl-tag rev">Niveau 3 · Améliorer les relations entre parties prenantes</span>
+    <div class="body-col">
+      <p class="lead rev">La finance ne se pratique jamais seul. Clients, fournisseurs, équipes, instances, partenaires bancaires : j'ai appris à coordonner ces relations.</p>
+      <span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
+      <ul class="stack rev"><li><span class="tx">Dans des organisations de tailles et d'espaces géographiques différents</span></li><li><span class="tx">Dans des organisations marchandes ou non marchandes</span></li></ul>
+      <span class="kicker rev" style="margin-top:44px">Apprentissages critiques visés</span>
+      <ul class="stack rev"><li><span class="tx">Mobiliser ses qualités individuelles au service de l'intelligence collective</span></li><li><span class="tx">Animer une équipe et mener un projet collaboratif</span></li><li><span class="tx">Combiner les méthodes de communication en lien avec la stratégie</span></li></ul>
+      <span class="kicker rev" style="margin-top:44px">Preuves</span>
+      <div class="proof rev"><h4>Le travail d'équipe sur BJCV</h4><p>Le projet de reprise a été mené à quatre, sur plusieurs mois. Il a fallu répartir les volets, étude de marché, organisation, finance, et faire converger nos analyses vers un dossier cohérent destiné à convaincre un banquier.</p></div><div class="proof rev"><h4>Le mandat de représentant étudiant</h4><p>Élu, j'ai porté les intérêts des étudiants dans les instances et organisé les assemblées générales, en facilitant la communication entre filières.</p></div><div class="proof rev"><h4>La trésorerie de l'association Art'mony</h4><p>Gérer une association demande de coordonner bénévoles, partenaires et obligations financières.</p></div><div class="proof rev"><h4>La relation clients et partenaires chez Nexans</h4><p>Mon poste en credit management reposait sur la relation avec les parties prenantes : relances d'un portefeuille de clients dédiés, échanges avec le courtier d'assurance-crédit, appui aux agents comptables de l'équipe. Ma fiche de poste en détaille le périmètre.</p><div class="trace-fig"><a class="trace-shot" href="trace-fiche-de-poste-nexans.pdf" target="_blank" rel="noopener"><img src="trace-nexans.jpg" alt="Fiche de poste Credit Management — Nexans France" loading="lazy"></a><span class="trace-cap">Capture · Fiche de poste Nexans</span><a class="trace-link" href="trace-fiche-de-poste-nexans.pdf" target="_blank" rel="noopener">Ouvrir le document (PDF)</a></div></div>
+      <span class="kicker rev" style="margin-top:30px">Étapes liées</span>
+      <div class="chips rev"><a href="#exp-bjcv" class="chip">BJCV</a><a href="#exp-conseil" class="chip">Conseil des étudiants</a><a href="#exp-nexans" class="chip">Nexans</a></div>
+      <div class="back rev"><a href="#competences" class="link-arrow">Toutes les compétences</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+<section class="page" id="comp-produire" data-nav="competences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Compétences / Produire</div>
+    <span class="kicker rev">Compétence GC2F</span>
+    <h1 class="rev" style="max-width:900px">Produire</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Produire l'information comptable, fiscale et sociale de l'organisation</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <span class="lvl-tag rev">Niveau 2 · Optimiser l'information produite</span>
+    <div class="body-col">
+      <p class="lead rev">C'est le cœur de mon métier : produire une information comptable fiable, conforme, et de plus en plus digitalisée. Trois ans de comptabilité fournisseur m'y ont solidement formé.</p>
+      <span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
+      <ul class="stack rev"><li><span class="tx">Dans des organisations de tailles et d'espaces géographiques différents</span></li><li><span class="tx">Dans des organisations marchandes ou non marchandes</span></li></ul>
+      <span class="kicker rev" style="margin-top:44px">Apprentissages critiques visés</span>
+      <ul class="stack rev"><li><span class="tx">Traiter et contrôler les opérations de comptabilité générale et approfondie</span></li><li><span class="tx">Prendre en charge la révision comptable en contrôlant les cycles</span></li><li><span class="tx">Établir les comptes à l'aide d'outils de digitalisation</span></li><li><span class="tx">Sécuriser l'information comptable produite</span></li></ul>
+      <span class="kicker rev" style="margin-top:44px">Preuves</span>
+      <div class="proof rev"><h4>Les clôtures comptables chez Nexans</h4><p>J'ai pris en charge des dossiers de clôture incluant la revalorisation et le traitement des créances douteuses, des opérations de comptabilité approfondie menées dans le respect des normes. La participation aux tâches de clôture figure noir sur blanc dans ma fiche de poste.</p><div class="trace-fig"><a class="trace-shot" href="trace-fiche-de-poste-nexans.pdf" target="_blank" rel="noopener"><img src="trace-nexans.jpg" alt="Fiche de poste Credit Management — Nexans France" loading="lazy"></a><span class="trace-cap">Capture · Fiche de poste Nexans</span><a class="trace-link" href="trace-fiche-de-poste-nexans.pdf" target="_blank" rel="noopener">Ouvrir le document (PDF)</a></div></div><div class="proof rev"><h4>Le déploiement de la facturation électronique</h4><p>J'ai contribué à la mise en place du e-invoicing, une illustration directe de l'adaptation à la digitalisation des activités comptables.</p></div><div class="proof rev"><h4>Le reporting comptable mensuel</h4><p>La production régulière des indicateurs comptables sous Power BI témoigne d'une information fiable, structurée et reproductible.</p></div>
+      <span class="kicker rev" style="margin-top:30px">Étapes liées</span>
+      <div class="chips rev"><a href="#exp-nexans" class="chip">Nexans</a><a href="#exp-bjcv" class="chip">BJCV</a></div>
+      <div class="back rev"><a href="#competences" class="link-arrow">Toutes les compétences</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+<section class="page" id="comp-evaluer" data-nav="competences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Compétences / Évaluer</div>
+    <span class="kicker rev">Compétence GC2F</span>
+    <h1 class="rev" style="max-width:900px">Évaluer</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Évaluer l'activité de l'organisation</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <span class="lvl-tag rev">Niveau 2 · Optimiser les outils d'analyse et de prévision</span>
+    <div class="body-col">
+      <p class="lead rev">Évaluer, c'est mesurer la rentabilité, anticiper, construire des prévisions. C'est la dimension la plus stratégique de la finance, et le cap vers lequel je veux orienter ma carrière.</p>
+      <span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
+      <ul class="stack rev"><li><span class="tx">Dans des organisations de tailles et d'espaces géographiques différents</span></li><li><span class="tx">Dans des organisations marchandes ou non marchandes</span></li></ul>
+      <span class="kicker rev" style="margin-top:44px">Apprentissages critiques visés</span>
+      <ul class="stack rev"><li><span class="tx">Identifier les points forts et faibles en activité et en structure financière</span></li><li><span class="tx">Mettre en place une comptabilité analytique et une gestion budgétaire</span></li><li><span class="tx">Évaluer les résultats et la performance par le contrôle budgétaire</span></li></ul>
+      <span class="kicker rev" style="margin-top:44px">Preuves</span>
+      <div class="proof rev"><h4>La valorisation par DCF du projet BJCV</h4><p>J'ai participé à la valorisation de l'entreprise par la méthode des flux de trésorerie actualisés : estimation des flux futurs, valeur terminale, actualisation au coût moyen pondéré du capital de 10 pour cent, pour aboutir à 716 000 euros.</p></div><div class="proof rev"><h4>Les prévisions sur quatre exercices</h4><p>Le dossier projette compte de résultat, ratios de solvabilité et de rentabilité, et trésorerie prévisionnelle sur quatre ans, pour vérifier la soutenabilité de l'endettement et la trajectoire de redressement.</p></div><div class="proof rev"><h4>Le suivi de la marge et des stocks chez Rexel</h4><p>Le pilotage des indicateurs de la filiale Mavisun est une évaluation continue de l'activité, tournée vers l'optimisation des performances.</p></div><div class="proof rev"><h4>La mesure de la performance de Doctolib</h4><p>Pour juger la soutenabilité du modèle, j'ai construit en SAE une grille d'indicateurs adaptée à une entreprise par abonnement : revenu récurrent, panier moyen par praticien, coût d'acquisition rapporté à la valeur client, taux d'attrition. L'analyse du BFR négatif montrait comment les abonnements payés d'avance financent spontanément la trésorerie.</p><div class="trace-fig"><a class="trace-shot" href="trace-sae6-doctolib.pdf" target="_blank" rel="noopener"><img src="trace-doctolib.jpg" alt="Support de l'étude stratégique Doctolib — SAE 3e année" loading="lazy"></a><span class="trace-cap">Capture · Étude Doctolib</span><a class="trace-link" href="trace-sae6-doctolib.pdf" target="_blank" rel="noopener">Ouvrir le support (PDF)</a></div></div>
+      <span class="kicker rev" style="margin-top:30px">Étapes liées</span>
+      <div class="chips rev"><a href="#exp-bjcv" class="chip">BJCV</a><a href="#exp-rexel" class="chip">Rexel</a><a href="#exp-nexans" class="chip">Nexans</a></div>
+      <div class="back rev"><a href="#competences" class="link-arrow">Toutes les compétences</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+<section class="page" id="a-cote" data-nav="a-cote">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Échappées</div>
+    <span class="kicker rev">Hors des sentiers comptables</span>
+    <h1 class="rev" style="max-width:900px">Ce qui me tient,<br>quand je quitte le bureau.</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Un parcours ne se résume pas à une ligne droite. Voici les échappées qui entretiennent mon équilibre : l'effort, la découverte et l'engagement.</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(40px,6vw,70px)">
+  <div class="shell">
+    <ul class="route">
+      <li class="rev"><a href="#cote-course"><span class="yr">Endurance</span><div><h3>Course &amp; marathon</h3><div class="ro">Montpellier, 42,195 km bouclés en 4 h 13</div></div><span class="go">Lire</span></a></li>
+      <li class="rev"><a href="#cote-voyages"><span class="yr">Découverte</span><div><h3>Carnet de voyage</h3><div class="ro">La curiosité comme moteur</div></div><span class="go">Lire</span></a></li>
+      <li class="rev"><a href="#cote-engagement"><span class="yr">Engagement</span><div><h3>Engagement associatif</h3><div class="ro">Solidarité Sida, trésorier d'Art'mony</div></div><span class="go">Lire</span></a></li>
+    </ul>
+  </div>
+</section>
+</section>
+
+<section class="page" id="cote-course" data-nav="a-cote">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Échappées / Course &amp; marathon</div>
+    <span class="kicker rev">Endurance · Montpellier Run Festival</span>
+    <h1 class="rev" style="max-width:900px">42,195 km, et tout ce qu'il<br>a fallu pour les tenir.</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Courir, c'est ma façon d'entretenir la constance et la patience qui me servent aussi au travail.</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(34px,5vw,60px);padding-bottom:0">
+  <div class="shell">
+    <div class="body-col">
+      <span class="kicker rev">Pourquoi courir</span>
+      <p class="lead rev">J'aime me fixer des objectifs hauts, presque déraisonnables — et m'y tenir. Le marathon est de ceux-là : un cap lointain qui ne se franchit qu'à force de régularité.</p>
+      <p class="rev">La course à pied m'accompagne depuis tout petit. J'ai fait de l'athlétisme au collège, et très jeune, j'avais déjà un rêve en tête : courir un jour un marathon. Ce n'était pas un objectif sportif abstrait, c'était une idée qui me suivait.</p>
+      <p class="rev">Cette envie, je la dois en partie à mes cours de latin et d'histoire. C'est là que j'ai découvert l'origine du marathon : en 490 avant J.-C., après la bataille de Marathon, un messager grec aurait couru jusqu'à Athènes pour annoncer la victoire, avant de s'effondrer. La distance de la course moderne, 42,195 km, porte encore la trace de cette histoire. Elle est vraie, et elle m'a marqué : derrière l'effort, il y a toujours un sens, un message à porter jusqu'au bout.</p>
+      <p class="rev">Boucler ce marathon, c'était donc tenir une promesse faite à l'enfant que j'étais. Et retrouver, sur 42 kilomètres, les mêmes qualités qui me servent au travail : la patience, l'anticipation et le calme face à l'effort qui dure.</p>
+    </div>
+  </div>
+</section>
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <div class="gallery rev">
+      <figure class="tall"><img src="marathon-course-1.jpg" alt="En course sur le marathon de Montpellier" loading="lazy"></figure>
+      <figure class="wide"><img src="marathon-course-2.jpg" alt="Dans le peloton, le long du parcours" loading="lazy"></figure>
+      <figure class="sq"><img src="marathon-medaille.jpg" alt="Médaille finisher du marathon" loading="lazy"></figure>
+      <figure class="sq"><img src="marathon-dossard.jpg" alt="Dossard 621" loading="lazy"></figure>
+    </div>
+    <p class="cap rev">Montpellier Run Festival · dossard 621 · médaille finisher</p>
+  </div>
+</section>
+<section class="region" style="padding-top:0">
+  <div class="shell split">
+    <div class="rev">
+      <p>J'ai bouclé le marathon de Montpellier sur les 42,195 kilomètres du parcours. C'est un projet en soi, bien avant la ligne de départ : un plan d'entraînement, une préparation quotidienne et la capacité à tenir un cap lointain sans se décourager.</p>
+      <p>Le jour de la course, l'enjeu n'est plus la vitesse mais la gestion : doser l'effort, garder un rythme régulier, rester lucide quand la fatigue arrive. Les mêmes qualités que je retrouve dans mon travail, la régularité, l'anticipation et le calme face à l'effort qui dure.</p>
+    </div>
+    <div class="rev">
+      <span class="kicker">Résultat officiel</span>
+      <div class="results">
+        <div class="row"><span class="lbl">Épreuve</span><span class="val">Marathon</span></div>
+        <div class="row"><span class="lbl">Temps</span><span class="val"><span class="acc">4 h 13 min 17</span></span></div>
+        <div class="row"><span class="lbl">Classement général</span><span class="val">423<span class="u">e</span></span></div>
+        <div class="row"><span class="lbl">Catégorie Seniors Homme</span><span class="val">169<span class="u">e sur 320</span></span></div>
+        <div class="row"><span class="lbl">Allure moyenne</span><span class="val">6 min 00<span class="u">/km</span></span></div>
+        <div class="row"><span class="lbl">Vitesse moyenne</span><span class="val">10,0<span class="u">km/h</span></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="shell"><div class="back rev" style="margin-top:40px"><a href="#a-cote" class="link-arrow">Retour aux échappées</a></div></div>
+</section>
+</section>
+
+<section class="page" id="cote-voyages" data-nav="a-cote">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Échappées / Carnet de voyage</div>
+    <span class="kicker rev">Découverte · Fragments de paysages</span>
+    <h1 class="rev" style="max-width:900px">Carnet de voyage.</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Voyager, c'est découvrir le monde, mais aussi se découvrir soi-même.</p>
+  </div>
+</header>
+
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <div class="body-col">
+      <p class="rev">Dans ce carnet, je partage mes escapades, mes coups de cœur culturels, mes rencontres inattendues et ces petits détails qu'on ne voit qu'en marchant sans GPS.</p>
+      <p class="rev">Entre photos, anecdotes et impressions personnelles, ce sont des fragments de paysages et d'émotions que je vous invite à explorer.</p>
+      <p class="rev">Chaque voyage m'a laissé une trace — ici, je vous montre lesquelles.</p>
+
+      <span class="kicker rev" style="margin-top:44px">Galerie</span>
+      <div class="annexes rev">
+        <figure class="annexe"><a href="voyage-new-york.jpg" target="_blank" rel="noopener"><img src="voyage-new-york.jpg" alt="New York" loading="lazy"></a><figcaption>New York</figcaption></figure>
+        <figure class="annexe"><a href="voyage-florence.jpg" target="_blank" rel="noopener"><img src="voyage-florence.jpg" alt="Florence" loading="lazy"></a><figcaption>Florence</figcaption></figure>
+        <figure class="annexe"><a href="voyage-vilnius.jpg" target="_blank" rel="noopener"><img src="voyage-vilnius.jpg" alt="Vilnius" loading="lazy"></a><figcaption>Vilnius</figcaption></figure>
+        <figure class="annexe"><a href="voyage-croatie.jpg" target="_blank" rel="noopener"><img src="voyage-croatie.jpg" alt="Croatie" loading="lazy"></a><figcaption>Croatie</figcaption></figure>
+        <figure class="annexe"><a href="voyage-barcelone.jpg" target="_blank" rel="noopener"><img src="voyage-barcelone.jpg" alt="Barcelone" loading="lazy"></a><figcaption>Barcelone</figcaption></figure>
+      </div>
+
+      <div class="back rev" style="margin-top:36px"><a href="#a-cote" class="link-arrow">Retour aux échappées</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+<section class="page" id="cote-engagement" data-nav="a-cote">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Échappées / Engagement associatif</div>
+    <span class="kicker rev">Engagement · Responsabilité · Collectif</span>
+    <h1 class="rev" style="max-width:900px">Mettre mes compétences<br>au service d'un collectif.</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">M'engager, c'est apprendre à porter des responsabilités réelles dans un cadre différent de l'entreprise, avec des interlocuteurs variés et des enjeux humains au premier plan.</p>
+  </div>
+</header>
+
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <div class="body-col">
+
+      <!-- Art'mony -->
+      <div class="asso-card rev">
+        <div class="asso-header">
+          <div class="asso-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+          </div>
+          <div class="asso-header-text">
+            <h3>Art'mony</h3>
+            <div class="asso-meta">Trésorier · Association culturelle</div>
+          </div>
+        </div>
+        <div class="asso-body">
+          <p>Art'mony est une association à vocation culturelle et artistique. En tant que trésorier, je suis responsable de la santé financière de la structure : tenue des comptes, élaboration et suivi du budget annuel, gestion des relations avec les partenaires financiers et transparence envers les membres.</p>
+          <p>Ce rôle me permet d'appliquer concrètement mes compétences en gestion financière dans un cadre associatif, où la ressource est rare et où chaque euro dépensé doit servir le projet collectif. C'est une gestion de proximité, directe, sans filet.</p>
+          <p>Coordonner bénévoles, prestataires et partenaires pour organiser des événements m'a appris à allier exigence financière et sens du collectif.</p>
+        </div>
+        <div class="asso-kpis">
+          <div class="k"><div class="n">1</div><div class="l">Mandat de trésorier</div></div>
+          <div class="k"><div class="n">Budget</div><div class="l">Suivi et reporté</div></div>
+          <div class="k"><div class="n">Collectif</div><div class="l">Bénévoles coordonnés</div></div>
+        </div>
+        <div class="skills-learned">
+          <h4>Compétences développées</h4>
+          <div class="chips">
+            <span class="chip">Gestion budgétaire</span>
+            <span class="chip">Tenue de comptes</span>
+            <span class="chip">Coordination</span>
+            <span class="chip">Responsabilité</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solidarité Sida -->
+      <div class="asso-card rev">
+        <div class="asso-header">
+          <div class="asso-icon" style="background:var(--route)">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="asso-header-text">
+            <h3>Solidarité Sida</h3>
+            <div class="asso-meta">Bénévole · Association humanitaire</div>
+          </div>
+        </div>
+        <div class="asso-body">
+          <p>Solidarité Sida est une association de lutte contre le sida et de soutien aux personnes touchées par la maladie. Mon engagement bénévole m'a appris le sens de l'utilité commune et la valeur d'une action collective au service d'une cause qui dépasse les intérêts individuels.</p>
+          <p>Participer à des événements de sensibilisation, mobiliser son réseau et porter une cause avec conviction sont des expériences qui développent des qualités humaines précieuses : empathie, écoute, sens de l'organisation dans l'urgence.</p>
+          <p>S'engager pour une cause humanitaire, c'est aussi rappeler que les compétences financières et organisationnelles ont une valeur au-delà du monde des affaires.</p>
+        </div>
+        <div class="skills-learned">
+          <h4>Ce que cet engagement m'apporte</h4>
+          <div class="chips">
+            <span class="chip">Sens du collectif</span>
+            <span class="chip">Empathie</span>
+            <span class="chip">Organisation d'événements</span>
+            <span class="chip">Communication</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="back rev"><a href="#a-cote" class="link-arrow">Retour aux échappées</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+<section class="page" id="qui-suis-je" data-nav="qui-suis-je">
+<!-- En-tête profil -->
+<div class="shell">
+  <div class="profile-header">
+
+    <div class="portrait-wrap rev">
+      <div class="portrait">
+        <img src="photo-profil.jpg" alt="Alexandre Enderlin">
+      </div>
+      <div class="contact-stack">
+        <a href="mailto:enderlin.alexandre@gmail.com" class="cc">✉&ensp;enderlin.alexandre@gmail.com</a>
+        <a href="tel:+33614821949" class="cc">✆&ensp;+33 6 14 82 19 49</a>
+        <a href="https://www.linkedin.com/in/alexandre-enderlin-830065242/" target="_blank" rel="noopener" class="cc">in&ensp;LinkedIn</a>
+        <a href="CV_Alexandre_Enderlin.pdf" class="cc cc-dl" download>↓&ensp;Télécharger le CV</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="step-id rev" style="margin-bottom:1.4rem">Profil · Qui suis-je ?</div>
+      <h1 class="profile-name rev">Alexandre<br>Enderlin</h1>
+      <div class="profile-meta rev">
+        <span>22 ans</span>
+        <span>BUT GEA · GC2F</span>
+        <span>Apprenti Chef de Projet Finance</span>
+      </div>
+      <p class="lead rev">J'ai 22 ans et je termine mon BUT Gestion des Entreprises et des Administrations, parcours Gestion Comptable, Fiscale et Financière (GC2F), à l'IUT de Paris Rives de Seine. À la rentrée 2026, je rejoins le Programme Grande École (PGE) de Kedge Business School pour poursuivre en finance, audit et contrôle de gestion.</p>
+      <p class="rev">J'ai choisi l'alternance dès la première année, par conviction : c'est en entreprise que les notions comptables et financières prennent tout leur sens. Trois années de BUT m'ont donné des bases solides — comptabilité approfondie, fiscalité, gestion financière, contrôle de gestion, droit et systèmes d'information — que j'ai immédiatement confrontées au terrain.</p>
+      <p class="rev"><strong>Trois ans chez Nexans</strong>, leader mondial du câble, ont constitué le cœur de ma formation. Au sein du service Credit Management et Comptabilité Fournisseur, j'ai géré un portefeuille de clients dédiés : suivi des encaissements, relances, traitement des impayés et échanges avec le courtier d'assurance-crédit. J'ai pris part aux clôtures comptables — revalorisation, créances douteuses — et produit chaque mois, sous Power BI, le reporting des indicateurs comptables. J'ai aussi contribué au déploiement de la facturation électronique, une vraie plongée dans la digitalisation des processus comptables.</p>
+      <p class="rev"><strong>Depuis 2025, chez Rexel</strong>, distributeur international de matériel électrique, je suis apprenti chef de projet finance sur la filiale Mavisun. J'élabore les reportings de compte de résultat, je pilote les indicateurs de marge et de stocks, et je mène des projets financiers transverses. Je suis passé de la production comptable au pilotage : rendre la performance lisible pour aider la direction à décider.</p>
+      <p class="rev">Méthode, rigueur et curiosité me guident au quotidien. J'aime remettre de l'ordre dans une information dispersée, comprendre une organisation avant d'agir, et suivre de près l'actualité économique et financière.</p>
+      <div class="traits rev">
+        <span class="trait">Rigoureux</span>
+        <span class="trait">Organisé</span>
+        <span class="trait">Analytique</span>
+        <span class="trait">Adaptable</span>
+        <span class="trait">Communicant</span>
+        <span class="trait">Curieux</span>
+        <span class="trait">Autonome</span>
+      </div>
+      <div class="goal-box rev">
+        <h3>Mon objectif professionnel</h3>
+        <p>Intégrer un poste d'analyste financier ou de contrôleur de gestion au sein d'un groupe international, où je pourrai mettre à profit mes compétences en reporting, analyse de la performance et pilotage financier. Le Programme Grande École de Kedge me permettra de franchir ce cap avec une solide formation grande école.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- Formations + Expériences -->
+<section class="region">
+  <div class="shell two">
+
+    <div class="rev">
+      <span class="kicker">Parcours de formation</span>
+      <ul class="xtl">
+        <li>
+          <span class="xdate">2026 — 2028</span>
+          <div>
+            <h4>Programme Grande École (PGE)</h4>
+            <div class="xorg">Kedge Business School</div>
+            <p>Grade de Master en management, spécialisation finance d'entreprise, audit et contrôle de gestion, en alternance.</p>
+            <span class="xtag">À venir</span>
+          </div>
+        </li>
+        <li>
+          <span class="xdate">2022 — 2026</span>
+          <div>
+            <h4>BUT GEA · Parcours GC2F</h4>
+            <div class="xorg">IUT Rives de Seine (Paris Descartes)</div>
+            <p>Comptabilité approfondie, fiscalité et gestion financière. Contrôle de gestion, droit, systèmes d'information, anglais des affaires.</p>
+            <span class="xtag">En cours</span>
+          </div>
+        </li>
+        <li>
+          <span class="xdate">2021</span>
+          <div>
+            <h4>Baccalauréat général</h4>
+            <div class="xorg">Mention assez bien</div>
+            <p>Spécialité Sciences Économiques et Sociales. Option Mathématiques.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="rev">
+      <span class="kicker">Expériences professionnelles</span>
+      <ul class="xtl">
+        <li>
+          <span class="xdate">2025 — 2026</span>
+          <div>
+            <h4>Chef de projet Finance</h4>
+            <div class="xorg">Rexel France · Filiale Mavisun</div>
+            <p>Élaboration des reportings P&amp;L, pilotage des indicateurs de marge et de stocks, gestion de projets financiers transverses.</p>
+            <span class="xtag">Alternance</span>
+          </div>
+        </li>
+        <li>
+          <span class="xdate">2022 — 2025</span>
+          <div>
+            <h4>Analyste Credit Management &amp; Comptabilité Fournisseur</h4>
+            <div class="xorg">Nexans France</div>
+            <p>Gestion de portefeuille clients, clôtures comptables, reporting mensuel Power BI, déploiement de la facturation électronique. 3 ans.</p>
+            <span class="xtag">Alternance</span>
+          </div>
+        </li>
+        <li>
+          <span class="xdate">2023 — 2025</span>
+          <div>
+            <h4>Représentant Administratif</h4>
+            <div class="xorg">Conseil des étudiants · IUT Rives de Seine</div>
+            <p>Représentation des intérêts des étudiants dans les instances administratives, organisation des assemblées générales inter-filières.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- Compétences -->
+<section class="region">
+  <div class="shell">
+    <span class="kicker rev">Boîte à outils</span>
+    <h2 class="rev" style="max-width:24ch;margin-bottom:28px">Ce que je sais faire.</h2>
+    <div class="skills-grid rev">
+      <div class="sk">
+        <h4>Finance &amp; Comptabilité</h4>
+        <p>Analyse des risques, recouvrement de créances, gestion de portefeuille clients, clôture comptable, reporting financier, notions d'audit et contrôle de gestion.</p>
+      </div>
+      <div class="sk">
+        <h4>Outils numériques</h4>
+        <p>Excel (TCD, formules avancées, VBA), Power BI, SAP, Basware, Get Paid, Glovia.</p>
+      </div>
+      <div class="sk">
+        <h4>Soft skills</h4>
+        <p>Rigueur, organisation, esprit d'analyse, qualité rédactionnelle, capacité d'adaptation, communication interpersonnelle.</p>
+      </div>
+      <div class="sk">
+        <h4>Langues</h4>
+        <p>Anglais B2 — intermédiaire opérationnel.<br>Espagnol B1 — niveau scolaire.</p>
+      </div>
+      <div class="sk">
+        <h4>Centres d'intérêt</h4>
+        <p>Actualité économique et marchés financiers. Voyages culturels. Course à pied et marathon (Montpellier 4h13).</p>
+      </div>
+      <div class="sk">
+        <h4>Engagements</h4>
+        <p>Bénévole pour Solidarité Sida.<br>Trésorier de l'association Art'mony.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact-section">
+  <div class="shell">
+    <span class="kicker">Restons en contact</span>
+    <h2>Travaillons ensemble.</h2>
+    <p>N'hésitez pas à me contacter pour toute opportunité d'alternance, de stage ou d'échange professionnel.</p>
+    <div class="contact-items">
+      <div class="ci">
+        <span class="lbl">Email</span>
+        <a href="mailto:enderlin.alexandre@gmail.com">enderlin.alexandre@gmail.com</a>
+      </div>
+      <div class="ci">
+        <span class="lbl">Téléphone</span>
+        <a href="tel:+33614821949">+33 6 14 82 19 49</a>
+      </div>
+      <div class="ci">
+        <span class="lbl">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/alexandre-enderlin-830065242/" target="_blank" rel="noopener">Alexandre Enderlin</a>
+      </div>
+    </div>
+    <div style="margin-top:44px">
+      <a href="CV_Alexandre_Enderlin.pdf" class="btn" download>Télécharger mon CV</a>
+    </div>
+  </div>
+</section>
+</section>
+
+<!-- ====================== GetFitBox ====================== -->
+<section class="page" id="exp-getfitbox" data-nav="experiences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Itinéraire / Transformation numérique · GetFitBox</div>
+    <span class="kicker rev">Projet phare · SAE Transformation numérique des organisations</span>
+    <h1 class="rev" style="max-width:900px">GetFitBox, concevoir et lancer<br>un site e-commerce de A à Z.</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">En équipe, nous avons imaginé puis construit un service de box repas pensées pour les sportifs, et son site marchand complet sur Shopify : offre, parcours d'achat, modèle économique et cadre réglementaire.</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <div class="facts rev">
+      <span>Cadre<span class="fval">BUT GC2F, 3e année</span></span>
+      <span>Projet<span class="fval">Transformation numérique des organisations</span></span>
+      <span>Plateforme<span class="fval">Shopify (thème Dawn)</span></span>
+      <span>Rôle<span class="fval">Offre, modèle financier, contenu</span></span>
+    </div>
+    <div class="body-col">
+      <p class="lead rev">GetFitBox part d'un constat : les box repas grand public (HelloFresh, Quitoque…) ne répondent pas aux besoins nutritionnels des sportifs. Notre service propose des portions calibrées — riches en protéines, à base de glucides complexes — pensées pour l'entraînement, et livrées en Île-de-France.</p>
+      <span class="kicker rev" style="margin-top:36px">Ce que nous avons construit</span>
+      <ul class="stack rev">
+        <li><span class="tx">Un site e-commerce complet sur Shopify : page d'accueil, catalogue, tunnel de commande et paiement sécurisé, espace client — en nous appuyant sur la sécurité (SSL, PCI DSS) et l'écosystème d'applications de la plateforme.</span></li>
+        <li><span class="tx">Un formulaire intelligent de qualification : il vérifie l'éligibilité géographique de la livraison et recommande automatiquement la box la plus adaptée selon les objectifs (prise de masse, maintien, perte de poids), les préférences (halal, végétarien) et l'intensité d'entraînement.</span></li>
+        <li><span class="tx">Une gamme structurée : trois familles (Classique, Halal, Veggie), chacune en quatre tailles (S, M, L, XL), soit douze box au catalogue, de 3,90 € à 7,00 € le repas.</span></li>
+        <li><span class="tx">Une politique tarifaire positionnée entre les box généralistes et les services sportifs haut de gamme, appuyée sur une analyse du marché et un sondage auprès de 82 personnes de notre cible.</span></li>
+        <li><span class="tx">Un cadre réglementaire maîtrisé : normes de sécurité alimentaire (IFS, HACCP, ISO 22000), choix de fournisseurs certifiés, droits d'auteur et conformité RGPD sur les données clients.</span></li>
+      </ul>
+      <div class="kpis rev" style="margin-top:30px">
+        <div class="k"><div class="n">12</div><div class="l">box au catalogue (3 gammes × 4 tailles)</div></div>
+        <div class="k"><div class="n">53 280 €</div><div class="l">chiffre d'affaires visé en N+2</div></div>
+        <div class="k"><div class="n">+12 220 €</div><div class="l">résultat net projeté en N+2</div></div>
+        <div class="k"><div class="n">82</div><div class="l">personnes sondées sur la cible</div></div>
+      </div>
+      <span class="kicker rev" style="margin-top:44px">Annexes · modèle financier</span>
+      <div class="annexes rev">
+        <figure class="annexe"><a href="annexe-getfitbox-couts.jpg" target="_blank" rel="noopener"><img src="annexe-getfitbox-couts.jpg" alt="Décomposition du coût d'une box GetFitBox" loading="lazy"></a><figcaption>Coût de revient d'une box</figcaption></figure>
+        <figure class="annexe"><a href="annexe-getfitbox-resultat.jpg" target="_blank" rel="noopener"><img src="annexe-getfitbox-resultat.jpg" alt="Compte de résultat prévisionnel année N" loading="lazy"></a><figcaption>Compte de résultat · Année N</figcaption></figure>
+        <figure class="annexe"><a href="annexe-getfitbox-previsionnel.jpg" target="_blank" rel="noopener"><img src="annexe-getfitbox-previsionnel.jpg" alt="Compte de résultat prévisionnel sur trois ans" loading="lazy"></a><figcaption>Prévisionnel sur 3 ans</figcaption></figure>
+      </div>
+      <div class="proof rev" style="margin-top:30px"><h4>Compétences mobilisées et validées</h4><p>Ce projet collaboratif valide mes compétences de <strong>pilotage de projet et de communication</strong>, ainsi que la gestion du temps et le travail en équipe. Le détail est présenté sur une page dédiée.</p><a class="trace-link" href="#comp-getfitbox-mob">Voir les compétences mobilisées et validées →</a></div>
+      <div class="back rev"><a href="#experiences" class="link-arrow">Retour à l'itinéraire</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+<!-- ====================== Dossier documentaire ====================== -->
+<section class="page" id="exp-dossier-doc" data-nav="experiences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">Itinéraire / Dossier documentaire</div>
+    <span class="kicker rev">BUT3 · Dossier documentaire</span>
+    <h1 class="rev" style="max-width:900px">Diagnostiquer un processus<br>pour proposer des améliorations.</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Dans le cadre de mon dossier documentaire de BUT3, j'ai analysé ma mission en entreprise sous l'angle des enjeux de l'organisation, puis formalisé des pistes d'amélioration des processus à l'aide d'outils de diagnostic.</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <div class="facts rev">
+      <span>Cadre<span class="fval">BUT GC2F, 3e année</span></span>
+      <span>Terrain<span class="fval">Rexel France · filiale Mavisun</span></span>
+      <span>Outils<span class="fval">QQOQCP, Ishikawa, SWOT</span></span>
+      <span>Visée<span class="fval">Optimiser le reporting financier</span></span>
+    </div>
+    <div class="body-col">
+      <span class="lvl-tag rev">Compétence Analyser · AC31.01 &amp; AC31.03</span>
+      <p class="lead rev">Mon dossier documentaire de BUT3 porte sur ma mission en alternance : l'optimisation du processus de reporting financier des filiales du groupe Rexel France, à travers le cas de Mavisun. Une démarche complète, du diagnostic à la proposition d'améliorations.</p>
+      <span class="kicker rev" style="margin-top:36px">Contexte</span>
+      <p class="rev">Les filiales transmettaient leurs données financières avec des délais et des formats hétérogènes, sans clôture mensuelle et avec peu de moyens humains pour le suivi. Résultat : des incohérences entre marge, stock et chiffre d'affaires, et de longues heures de retraitement au siège. Ma mission : fiabiliser et accélérer ce reporting, et le restituer sous forme de KPI lisibles.</p>
+      <div class="acblock rev"><span class="ac-code">AC31.01 — Intégrer l'impact des enjeux sur l'organisation</span><p>J'ai resitué la mission dans les enjeux du groupe : fiabilité de l'information financière, rapidité de consolidation entre filiale et siège, et qualité de la décision. Comprendre ces enjeux a permis de cibler les points du processus où se concentraient les pertes de temps et les erreurs.</p></div>
+      <span class="kicker rev" style="margin-top:36px">Cadrer le problème · QQOQCP</span>
+      <p class="rev">J'ai d'abord cadré la situation avec la méthode QQOQCP, pour décrire précisément le dysfonctionnement avant de chercher ses causes.</p>
+      <table class="qtable rev">
+        <tr><th>Quoi&nbsp;?</th><td>Dysfonctionnements dans la transmission et la fiabilisation des données financières de Mavisun : incohérences marge / stock / CA, absence de standardisation, retards d'envoi.</td></tr>
+        <tr><th>Qui&nbsp;?</th><td>La filiale Mavisun (production des données), le siège Rexel France (consolidation), l'apprenti chargé du reporting, la tutrice, la RAF et les équipes administratives.</td></tr>
+        <tr><th>Où&nbsp;?</th><td>Données produites dans Odoo au sein de Mavisun, retraitées et consolidées au siège de Rexel France.</td></tr>
+        <tr><th>Quand&nbsp;?</th><td>Problèmes observés avant 2025 ; mission menée sur l'année 2025-2026 ; objectif d'une transmission mensuelle sous 3 jours (J+3).</td></tr>
+        <tr><th>Comment&nbsp;?</th><td>Analyse des exports Odoo, normalisation des fichiers, création d'un modèle standardisé, contrôles de cohérence et calendrier de transmission.</td></tr>
+        <tr><th>Combien&nbsp;?</th><td>Retards récurrents (jusqu'à +6 jours), incohérences exigeant plusieurs heures de retraitement ; pas de coût logiciel mais un fort investissement en coordination.</td></tr>
+        <tr><th>Pourquoi&nbsp;?</th><td>Manque de standardisation, absence de clôture mensuelle, pratiques hétérogènes, ressources limitées et communication insuffisante entre siège et filiale.</td></tr>
+      </table>
+      <div class="acblock rev"><span class="ac-code">AC31.03 — Proposer des améliorations des processus</span><p>À partir du diagnostic, j'ai proposé un modèle de reporting standardisé (marge, stocks, KPI consolidés), des contrôles de cohérence et un calendrier de transmission. Le diagramme d'Ishikawa a permis de remonter aux causes racines du problème, en les classant par familles (méthodes, outils, données, ressources humaines, organisation).</p></div>
+      <span class="kicker rev" style="margin-top:44px">Traces · extraits du rapport de mission</span>
+      <div class="annexes rev">
+        <figure class="annexe"><a href="annexe-bordereau-mission.jpg" target="_blank" rel="noopener"><img src="annexe-bordereau-mission.jpg" alt="Bordereau de validation du sujet de mission — reporting Rexel Mavisun" loading="lazy"></a><figcaption>Bordereau de mission (validation du sujet)</figcaption></figure>
+        <figure class="annexe"><a href="annexe-ishikawa.jpg" target="_blank" rel="noopener"><img src="annexe-ishikawa.jpg" alt="Diagramme d'Ishikawa — dysfonctionnements du reporting Mavisun" loading="lazy"></a><figcaption>Diagramme d'Ishikawa</figcaption></figure>
+      </div>
+      <div class="back rev"><a href="#experiences" class="link-arrow">Retour à l'itinéraire</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+<!-- ====================== Compétences mobilisées — GetFitBox ====================== -->
+<section class="page" id="comp-getfitbox-mob" data-nav="experiences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">GetFitBox / Compétences mobilisées et validées</div>
+    <span class="kicker rev">Compétences mobilisées et validées</span>
+    <h1 class="rev" style="max-width:900px">Piloter un projet collaboratif<br>et sa communication.</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Le projet GetFitBox, mené en équipe sur plusieurs mois, a été l'occasion de valider des compétences de pilotage et des savoir-être essentiels au travail collectif.</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <div class="body-col">
+      <span class="lvl-tag rev">Compétence Piloter · Niveau 3 — Améliorer les relations entre les parties prenantes</span>
+      <span class="kicker rev">Savoir-être validés</span>
+      <div class="softpair rev"><span class="sp">Gestion du temps</span><span class="sp">Travail en équipe</span></div>
+      <span class="kicker rev" style="margin-top:40px">Contexte</span>
+      <p class="rev">Construire un site e-commerce complet en équipe, dans un délai contraint, supposait de coordonner des contributions multiples — offre, contenu, modèle financier, design, conformité — et de faire converger le tout vers un rendu professionnel et cohérent. C'est un projet de groupe avant d'être un livrable technique.</p>
+      <div class="acblock rev"><span class="ac-code">AC33.02 — Mener un projet collaboratif</span><p>Nous avons réparti les volets entre membres de l'équipe, fixé des jalons et tenu un rythme régulier. J'ai notamment piloté la construction du modèle économique (coûts de revient, compte de résultat, prévisionnel à trois ans) et veillé à sa cohérence avec l'offre commerciale portée par le reste du groupe. Tenir les délais tout en assurant la qualité a demandé une vraie gestion du temps.</p>
+      <div class="annexes" style="margin-top:16px">
+        <figure class="annexe"><a href="annexe-getfitbox-resultat.jpg" target="_blank" rel="noopener"><img src="annexe-getfitbox-resultat.jpg" alt="Compte de résultat prévisionnel GetFitBox" loading="lazy"></a><figcaption>Modèle financier construit en équipe</figcaption></figure>
+        <figure class="annexe"><a href="annexe-getfitbox-previsionnel.jpg" target="_blank" rel="noopener"><img src="annexe-getfitbox-previsionnel.jpg" alt="Prévisionnel à trois ans GetFitBox" loading="lazy"></a><figcaption>Trajectoire financière sur 3 ans</figcaption></figure>
+      </div>
+      </div>
+      <div class="acblock rev"><span class="ac-code">AC33.03 — Participer à l'amélioration de la politique de communication</span><p>J'ai contribué à l'identité et au discours de la marque : positionnement clair face aux concurrents, argumentaire de valeur (nutrition sportive, transparence sur la livraison), et cohérence du message sur l'ensemble du parcours client. Le formulaire de qualification a été pensé comme un outil de communication autant que de vente : informer honnêtement sur l'éligibilité et guider le visiteur sans le perdre.</p></div>
+      <div class="back rev"><a href="#exp-getfitbox" class="link-arrow">Retour au projet GetFitBox</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+<!-- ====================== Compétences mobilisées — BJCV ====================== -->
+<section class="page" id="comp-bjcv-mob" data-nav="experiences">
+<header class="region" style="padding-bottom:0">
+  <div class="shell">
+    <div class="step-id rev" style="margin-bottom:1.8rem">BJCV / Compétences mobilisées et validées</div>
+    <span class="kicker rev">Compétences mobilisées et validées</span>
+    <h1 class="rev" style="max-width:900px">Construire un argument structuré<br>à l'aide de données chiffrées.</h1>
+    <p class="lead rev" style="max-width:660px;margin-top:1.4rem">Le dossier de reprise de BJCV Mobilité Verte est la démonstration la plus complète de ma capacité à produire une information comptable et financière fiable, et à m'en servir pour bâtir une recommandation.</p>
+  </div>
+</header>
+<section class="region" style="padding-top:clamp(34px,5vw,60px)">
+  <div class="shell">
+    <div class="body-col">
+      <span class="lvl-tag rev">Compétence Produire · Niveau 2 — Optimiser l'information comptable, fiscale et sociale produite</span>
+      <span class="kicker rev">Contexte</span>
+      <p class="rev">Reprendre une entreprise suppose de transformer des données comptables brutes en un raisonnement solide : valoriser, projeter, et défendre un prix face à un banquier. Tout l'enjeu était de produire une information chiffrée juste, puis de l'organiser en un argument convaincant.</p>
+      <div class="acblock rev"><span class="ac-code">AC34.01 — Résoudre les problèmes comptables spécifiques</span><p>J'ai traité les retraitements nécessaires à l'évaluation : normalisation du résultat, lecture du besoin en fonds de roulement, et identification du stock dormant immobilisant plus de 800 000 € de trésorerie. Ces problèmes comptables résolus ont conditionné toute la suite du diagnostic.</p></div>
+      <div class="acblock rev"><span class="ac-code">AC34.03 — Réaliser un diagnostic pour apporter des conseils</span><p>À partir de cette information fiabilisée, j'ai construit un diagnostic complet : valorisation par les flux de trésorerie actualisés (716 000 €), plan de financement, et trajectoire de redressement sur quatre ans. La recommandation — acheter à 680 000 € et ramener la rotation de stock de 181 à 45 jours — découle directement des chiffres, et c'est là tout l'argument structuré.</p></div>
+      <div class="kpis rev" style="margin-top:24px">
+        <div class="k"><div class="n">716 k€</div><div class="l">valorisation par DCF</div></div>
+        <div class="k"><div class="n">680 k€</div><div class="l">prix défendu, données à l'appui</div></div>
+        <div class="k"><div class="n">4 ans</div><div class="l">de prévisions chiffrées</div></div>
+      </div>
+      <span class="kicker rev" style="margin-top:44px">Traces · tableaux financiers du dossier BJCV</span>
+      <div class="annexes rev">
+        <figure class="annexe"><a href="bjcv-dcf.jpg" target="_blank" rel="noopener"><img src="bjcv-dcf.jpg" alt="Tableau de valorisation par DCF — dossier BJCV" loading="lazy"></a><figcaption>Valorisation par DCF</figcaption></figure>
+        <figure class="annexe"><a href="bjcv-financement.jpg" target="_blank" rel="noopener"><img src="bjcv-financement.jpg" alt="Plan de financement — dossier BJCV" loading="lazy"></a><figcaption>Plan de financement</figcaption></figure>
+        <figure class="annexe"><a href="bjcv-solvabilite.jpg" target="_blank" rel="noopener"><img src="bjcv-solvabilite.jpg" alt="Ratios de solvabilité prévisionnels — dossier BJCV" loading="lazy"></a><figcaption>Ratios de solvabilité prévisionnels</figcaption></figure>
+      </div>
+      <div class="back rev"><a href="#exp-bjcv" class="link-arrow">Retour au projet BJCV</a></div>
+    </div>
+  </div>
+</section>
+</section>
+
+</main>
+
+<!-- Lecteur musique flottant, présent sur toutes les pages -->
+<div class="miniplayer" id="miniplayer">
+  <div class="mp-disc"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg></div>
+  <div class="mp-meta"><strong>Bande-son</strong><span>Guetta feat. Kid Cudi — Memories</span></div>
+  <button class="mp-btn" id="mpBtn" aria-label="Lecture / pause" title="Écouter la bande-son">
+    <svg class="mp-ico-play" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+  </button>
+  <audio id="mpAudio" src="bande-son.mp3" loop preload="none"></audio>
+</div>
+
+<footer class="foot">
+  <div class="shell foot-grid">
+    <div>
+      <h3>Alexandre Enderlin</h3>
+      <p>Gestion comptable, fiscale et financière. En route vers le Programme Grande École de Kedge Business School.</p>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <p><a href="mailto:enderlin.alexandre@gmail.com">enderlin.alexandre@gmail.com</a><br>+33 6 14 82 19 49<br><a href="https://www.linkedin.com/in/alexandre-enderlin-830065242/" target="_blank" rel="noopener">LinkedIn</a></p>
+    </div>
+    <div>
+      <h3>Le parcours</h3>
+      <p><a href="#experiences">Itinéraire</a><br><a href="#competences">Compétences</a><br><a href="#a-cote">Échappées</a><br><a href="#qui-suis-je">Profil</a></p>
+    </div>
+  </div>
+  <div class="shell"><div class="foot-base">Portfolio · BUT GEA · IUT de Paris Rives de Seine · 2026</div></div>
+</footer>
+<script>
+function toggleMenu(){document.querySelector('.menu').classList.toggle('open')}
+
+var TITLES = {"index":"D\u00e9part \u00b7 Alexandre Enderlin","experiences":"Itin\u00e9raire \u00b7 Alexandre Enderlin","exp-bjcv":"BJCV Mobilit\u00e9 Verte \u00b7 Alexandre Enderlin","exp-rexel":"Rexel France \u00b7 Alexandre Enderlin","exp-nexans":"Nexans France \u00b7 Alexandre Enderlin","exp-conseil":"Conseil des \u00e9tudiants \u00b7 Alexandre Enderlin","competences":"Comp\u00e9tences \u00b7 Alexandre Enderlin","comp-analyser":"Analyser \u00b7 Alexandre Enderlin","comp-decider":"D\u00e9cider \u00b7 Alexandre Enderlin","comp-piloter":"Piloter \u00b7 Alexandre Enderlin","comp-produire":"Produire \u00b7 Alexandre Enderlin","comp-evaluer":"\u00c9valuer \u00b7 Alexandre Enderlin","a-cote":"\u00c9chapp\u00e9es \u00b7 Alexandre Enderlin","cote-course":"Course &amp; marathon \u00b7 Alexandre Enderlin","cote-voyages":"Carnet de voyage \u00b7 Alexandre Enderlin","cote-engagement":"Engagement associatif \u00b7 Alexandre Enderlin","qui-suis-je":"Qui suis-je \u00b7 Alexandre Enderlin","exp-getfitbox":"GetFitBox \u00b7 Alexandre Enderlin","exp-dossier-doc":"Dossier documentaire \u00b7 Alexandre Enderlin","comp-getfitbox-mob":"Comp\u00e9tences GetFitBox \u00b7 Alexandre Enderlin","comp-bjcv-mob":"Comp\u00e9tences BJCV \u00b7 Alexandre Enderlin"};
+
+var revObserver = new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); revObserver.unobserve(e.target); } });
+}, {threshold:0.1});
+
+function observeRev(scope){
+  scope.querySelectorAll('.rev').forEach(function(el,i){
+    el.style.transitionDelay = ((i%3)*0.07)+'s';
+    revObserver.observe(el);
+  });
+}
+
+function showPage(id){
+  if(!document.getElementById(id)) id = 'index';
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.toggle('active', p.id===id); });
+  var active = document.getElementById(id);
+  // onglet de nav surligne
+  var group = active.getAttribute('data-nav');
+  document.querySelectorAll('.menu > li > a').forEach(function(a){
+    a.classList.toggle('here', a.getAttribute('href') === '#'+group);
+  });
+  // titre de l'onglet
+  if(TITLES[id]) document.title = TITLES[id];
+  // fermer le menu mobile
+  document.querySelector('.menu').classList.remove('open');
+  // revele immediatement ce qui est deja dans la fenetre, l'observer gere le reste au defilement
+  active.querySelectorAll('.rev').forEach(function(el){
+    if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('on');
+  });
+  window.scrollTo(0,0);
+}
+
+// lecteur musique flottant
+var ICON_PLAY = '<path d="M8 5v14l11-7z"/>';
+var ICON_PAUSE = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
+function setupPlayer(){
+  var audio = document.getElementById('mpAudio');
+  var btn = document.getElementById('mpBtn');
+  var box = document.getElementById('miniplayer');
+  if(!audio || !btn) return;
+  var svg = btn.querySelector('svg');
+  function sync(){
+    svg.innerHTML = audio.paused ? ICON_PLAY : ICON_PAUSE;
+    box.classList.toggle('playing', !audio.paused);
+  }
+  btn.addEventListener('click', function(){
+    if(audio.paused){ audio.play(); } else { audio.pause(); }
+  });
+  audio.addEventListener('play', sync);
+  audio.addEventListener('pause', sync);
+  sync();
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  observeRev(document);
+  setupPlayer();
+  showPage((location.hash || '#index').slice(1));
+});
+window.addEventListener('hashchange', function(){
+  showPage((location.hash || '#index').slice(1));
+});
+</script>
+</body>
+</html>
