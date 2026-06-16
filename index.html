@@ -139,6 +139,15 @@ a.chip:hover{border-color:var(--route);color:var(--route)}
 .qtable th{width:120px;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--route);background:var(--card);white-space:nowrap}
 .qtable td{color:var(--ink-soft)}
 
+/* projet à télécharger (un par compétence) */
+.projet-dl{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--route);border-radius:3px;padding:22px 24px;margin:26px 0 8px;box-shadow:0 18px 38px -32px rgba(32,50,47,0.5)}
+.projet-dl .projet-tag{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--route);display:block;margin-bottom:8px}
+.projet-dl h3{font-family:var(--serif);font-weight:500;font-size:1.3rem;margin-bottom:8px}
+.projet-dl p{font-size:0.95rem;color:var(--ink-soft);margin:0 0 16px}
+.projet-btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:0.74rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--paper);background:var(--route);padding:11px 18px;border-radius:2px;text-decoration:none;transition:background .18s}
+.projet-btn:hover{background:var(--route-deep)}
+.projet-btn svg{width:14px;height:14px;fill:currentColor}
+
 /* lecteur musique flottant, présent sur toutes les pages */
 .miniplayer{position:fixed;right:clamp(14px,3vw,28px);bottom:clamp(14px,3vw,24px);z-index:200;display:flex;align-items:center;gap:12px;background:var(--ink);color:var(--paper);border-radius:40px;padding:9px 16px 9px 11px;box-shadow:0 16px 40px -12px rgba(32,50,47,0.55);max-width:calc(100vw - 32px)}
 .miniplayer .mp-disc{width:34px;height:34px;border-radius:50%;background:var(--route);display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:spin 6s linear infinite;animation-play-state:paused}
@@ -753,7 +762,7 @@ a.cc-dl:hover{background:var(--route);border-color:var(--route);color:var(--pape
     <span class="lvl-tag rev">Niveau 2 · Évaluer les processus de l'organisation</span>
     <div class="body-col">
       <p class="lead rev">Comprendre une organisation, ses enjeux et ses processus, c'est le premier relevé avant de tracer une route. En formation comme chez Nexans, j'ai appris à lire une organisation avant de l'analyser.</p>
-      <span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
+      <div class="projet-dl rev"><span class="projet-tag">Projet à l'appui · à télécharger</span><h3>Dossier documentaire — Reporting financier de Mavisun</h3><p>Mon dossier documentaire de BUT3 : l'optimisation du processus de reporting financier des filiales de Rexel France, à travers le cas de Mavisun. Diagnostic complet de l'organisation (QQOQCP, Ishikawa, SWOT), analyse des dysfonctionnements et propositions concrètes d'amélioration.</p><a class="projet-btn" href="Dossier%20documentaire%20finale%20Alexandre%20Enderlin.docx" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5z"/></svg> Télécharger le dossier (Word)</a></div><span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
       <ul class="stack rev"><li><span class="tx">Dans des organisations de tailles et d'espaces géographiques différents</span></li><li><span class="tx">Dans des organisations marchandes ou non marchandes</span></li></ul>
       <span class="kicker rev" style="margin-top:44px">Apprentissages critiques visés</span>
       <ul class="stack rev"><li><span class="tx">Analyser les différents types d'enjeux</span></li><li><span class="tx">Analyser les dimensions identitaires de l'organisation</span></li><li><span class="tx">Évaluer le niveau de performance des processus</span></li></ul>
@@ -781,7 +790,7 @@ a.cc-dl:hover{background:var(--route);border-color:var(--route);color:var(--pape
     <span class="lvl-tag rev">Niveau 3 · Concourir à la prise de décision</span>
     <div class="body-col">
       <p class="lead rev">Une bonne décision repose sur une information fiable et bien présentée. Mon rôle est souvent de produire les analyses et les tableaux de bord qui éclairent un choix.</p>
-      <span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
+      <div class="projet-dl rev"><span class="projet-tag">Projet à l'appui · à télécharger</span><h3>Doctolib — Diagnostic financier et stratégie d'investissement</h3><p>L'étude de diagnostic financier de Doctolib face à l'arrivée de l'IA clinique : cette croissance est-elle soutenable ? J'y recommande une stratégie de financement adaptée à chaque axe de développement — une véritable aide à la décision sous risque.</p><a class="projet-btn" href="trace-sae6-doctolib.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5z"/></svg> Télécharger le dossier (PDF)</a></div><span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
       <ul class="stack rev"><li><span class="tx">Dans des organisations de tailles et d'espaces géographiques différents</span></li><li><span class="tx">Dans des organisations marchandes ou non marchandes</span></li></ul>
       <span class="kicker rev" style="margin-top:44px">Apprentissages critiques visés</span>
       <ul class="stack rev"><li><span class="tx">Exploiter les données pour accompagner la prise de décision</span></li><li><span class="tx">Exploiter un ERP et ses fonctionnalités</span></li><li><span class="tx">Analyser les contraintes et les risques, et leur impact sur la performance</span></li></ul>
@@ -809,7 +818,7 @@ a.cc-dl:hover{background:var(--route);border-color:var(--route);color:var(--pape
     <span class="lvl-tag rev">Niveau 3 · Améliorer les relations entre parties prenantes</span>
     <div class="body-col">
       <p class="lead rev">La finance ne se pratique jamais seul. Clients, fournisseurs, équipes, instances, partenaires bancaires : j'ai appris à coordonner ces relations.</p>
-      <span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
+      <div class="projet-dl rev"><span class="projet-tag">Projet à l'appui · à télécharger</span><h3>GetFitBox — Lancement d'un site e-commerce en équipe</h3><p>La conception et le lancement, en équipe, d'un site e-commerce de box repas pour sportifs sur Shopify : coordination du projet collaboratif, construction du modèle économique et définition de la politique de communication de la marque.</p><a class="projet-btn" href="GetFitBox.docx" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5z"/></svg> Télécharger le dossier (Word)</a></div><span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
       <ul class="stack rev"><li><span class="tx">Dans des organisations de tailles et d'espaces géographiques différents</span></li><li><span class="tx">Dans des organisations marchandes ou non marchandes</span></li></ul>
       <span class="kicker rev" style="margin-top:44px">Apprentissages critiques visés</span>
       <ul class="stack rev"><li><span class="tx">Mobiliser ses qualités individuelles au service de l'intelligence collective</span></li><li><span class="tx">Animer une équipe et mener un projet collaboratif</span></li><li><span class="tx">Combiner les méthodes de communication en lien avec la stratégie</span></li></ul>
@@ -837,7 +846,7 @@ a.cc-dl:hover{background:var(--route);border-color:var(--route);color:var(--pape
     <span class="lvl-tag rev">Niveau 2 · Optimiser l'information produite</span>
     <div class="body-col">
       <p class="lead rev">C'est le cœur de mon métier : produire une information comptable fiable, conforme, et de plus en plus digitalisée. Trois ans de comptabilité fournisseur m'y ont solidement formé.</p>
-      <span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
+      <div class="projet-dl rev"><span class="projet-tag">Projet à l'appui · à télécharger</span><h3>BJCV Mobilité Verte — Dossier de reprise d'entreprise</h3><p>Le dossier complet de reprise de BJCV Mobilité Verte : étude de marché, valorisation par flux de trésorerie actualisés, plan de financement et liasse prévisionnelle sur quatre ans. La production d'une information financière fiable, du diagnostic jusqu'à la recommandation.</p><a class="projet-btn" href="dossier-reprise-bjcv.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5z"/></svg> Télécharger le dossier (PDF)</a></div><span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
       <ul class="stack rev"><li><span class="tx">Dans des organisations de tailles et d'espaces géographiques différents</span></li><li><span class="tx">Dans des organisations marchandes ou non marchandes</span></li></ul>
       <span class="kicker rev" style="margin-top:44px">Apprentissages critiques visés</span>
       <ul class="stack rev"><li><span class="tx">Traiter et contrôler les opérations de comptabilité générale et approfondie</span></li><li><span class="tx">Prendre en charge la révision comptable en contrôlant les cycles</span></li><li><span class="tx">Établir les comptes à l'aide d'outils de digitalisation</span></li><li><span class="tx">Sécuriser l'information comptable produite</span></li></ul>
@@ -865,7 +874,7 @@ a.cc-dl:hover{background:var(--route);border-color:var(--route);color:var(--pape
     <span class="lvl-tag rev">Niveau 2 · Optimiser les outils d'analyse et de prévision</span>
     <div class="body-col">
       <p class="lead rev">Évaluer, c'est mesurer la rentabilité, anticiper, construire des prévisions. C'est la dimension la plus stratégique de la finance, et le cap vers lequel je veux orienter ma carrière.</p>
-      <span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
+      <div class="projet-dl rev"><span class="projet-tag">Projet à l'appui · à télécharger</span><h3>Un temps pour nous — Création et évaluation d'un projet d'entreprise</h3><p>Le projet de création d'entreprise « Un temps pour nous » : analyse de l'environnement, étude du marché et construction des prévisions financières. L'occasion de bâtir puis d'évaluer la viabilité d'un projet à l'aide d'outils d'analyse et de prévision.</p><a class="projet-btn" href="dossier-un-temps-pour-nous.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5z"/></svg> Télécharger le dossier (PDF)</a></div><span class="kicker rev" style="margin-top:44px">Situations professionnelles</span>
       <ul class="stack rev"><li><span class="tx">Dans des organisations de tailles et d'espaces géographiques différents</span></li><li><span class="tx">Dans des organisations marchandes ou non marchandes</span></li></ul>
       <span class="kicker rev" style="margin-top:44px">Apprentissages critiques visés</span>
       <ul class="stack rev"><li><span class="tx">Identifier les points forts et faibles en activité et en structure financière</span></li><li><span class="tx">Mettre en place une comptabilité analytique et une gestion budgétaire</span></li><li><span class="tx">Évaluer les résultats et la performance par le contrôle budgétaire</span></li></ul>
